@@ -7,11 +7,7 @@ SampleController::SampleController(SampleRepository& repo) : repo_(repo) {}
 bool SampleController::registerSample(const Sample& sample) {
     if (!validate(sample)) return false;
     if (repo_.findById(sample.id).has_value()) return false;
-    try {
-        repo_.save(sample);
-    } catch (...) {
-        return false;
-    }
+    repo_.save(sample);
     return true;
 }
 

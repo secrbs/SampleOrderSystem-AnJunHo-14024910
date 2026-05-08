@@ -17,13 +17,9 @@
 
 <span style = "background-color:#dfd">bool SampleController::registerSample(const Sample&amp; sample) {
     if (!validate(sample)) return false;
-    if (repo_.findById(sample.id).has_value()) return false;</span>
-    try {
-<span style = "background-color:#dfd">        repo_.save(sample);</span>
-<span style = "background-color:#fdd">    } catch (...) {
-        return false;
-    }</span>
-<span style = "background-color:#dfd">    return true;
+    if (repo_.findById(sample.id).has_value()) return false;
+    repo_.save(sample);
+    return true;
 }</span>
 
 <span style = "background-color:#dfd">std::vector&lt;Sample&gt; SampleController::getAll() const {

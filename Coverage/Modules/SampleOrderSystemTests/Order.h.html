@@ -16,7 +16,7 @@
 
 enum class OrderStatus { RESERVED, REJECTED, PRODUCING, CONFIRMED, RELEASE };
 
-<span style = "background-color:#fdd">inline void to_json(nlohmann::json&amp; j, const OrderStatus&amp; s) {
+<span style = "background-color:#dfd">inline void to_json(nlohmann::json&amp; j, const OrderStatus&amp; s) {
     static const std::map&lt;OrderStatus, std::string&gt; m = {</span>
         {OrderStatus::RESERVED,  "RESERVED"},
         {OrderStatus::REJECTED,  "REJECTED"},
@@ -24,7 +24,7 @@ enum class OrderStatus { RESERVED, REJECTED, PRODUCING, CONFIRMED, RELEASE };
         {OrderStatus::CONFIRMED, "CONFIRMED"},
         {OrderStatus::RELEASE,   "RELEASE"},
     };
-<span style = "background-color:#fdd">    j = m.at(s);
+<span style = "background-color:#dfd">    j = m.at(s);
 }</span>
 
 <span style = "background-color:#dfd">inline void from_json(const nlohmann::json&amp; j, OrderStatus&amp; s) {
@@ -48,13 +48,13 @@ struct Order {
     std::string updatedAt;
 };
 
-<span style = "background-color:#fdd">inline void to_json(nlohmann::json&amp; j, const Order&amp; o) {
+<span style = "background-color:#dfd">inline void to_json(nlohmann::json&amp; j, const Order&amp; o) {
     j = nlohmann::json{</span>
         {"orderId", o.orderId}, {"sampleId", o.sampleId},
         {"customerName", o.customerName}, {"quantity", o.quantity},
         {"status", o.status}, {"createdAt", o.createdAt}, {"updatedAt", o.updatedAt}
     };
-<span style = "background-color:#fdd">}</span>
+<span style = "background-color:#dfd">}</span>
 
 <span style = "background-color:#dfd">inline void from_json(const nlohmann::json&amp; j, Order&amp; o) {
     j.at("orderId").get_to(o.orderId);

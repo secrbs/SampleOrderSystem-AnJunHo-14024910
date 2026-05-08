@@ -44,13 +44,13 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
 <span style = "background-color:#dfd">void SampleRepository::save(const Sample&amp; sample) {
     auto it = std::find_if(samples_.begin(), samples_.end(),
         [&amp;sample](const Sample&amp; s) { return s.id == sample.id; });
-    if (it != samples_.end())</span>
-<span style = "background-color:#fdd">        throw std::runtime_error("ID already exists: " + sample.id);</span>
-<span style = "background-color:#dfd">    samples_.push_back(sample);
+    if (it != samples_.end())
+        throw std::runtime_error("ID already exists: " + sample.id);
+    samples_.push_back(sample);
     persist();
 }</span>
 
-<span style = "background-color:#fdd">bool SampleRepository::update(const Sample&amp; sample) {
+<span style = "background-color:#dfd">bool SampleRepository::update(const Sample&amp; sample) {
     auto it = std::find_if(samples_.begin(), samples_.end(),
         [&amp;sample](const Sample&amp; s) { return s.id == sample.id; });
     if (it == samples_.end()) return false;
@@ -66,10 +66,10 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
 <span style = "background-color:#dfd">        nlohmann::json j;
         f &gt;&gt; j;
         samples_ = j.get&lt;std::vector&lt;Sample&gt;&gt;();
-    } catch (...) {</span>
-<span style = "background-color:#fdd">        samples_.clear();
-    }</span>
-<span style = "background-color:#dfd">}</span>
+    } catch (...) {
+        samples_.clear();
+    }
+}</span>
 
 <span style = "background-color:#dfd">void SampleRepository::persist() const {
     std::ofstream f(filePath_);

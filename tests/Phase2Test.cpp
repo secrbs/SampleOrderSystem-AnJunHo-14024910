@@ -1,8 +1,11 @@
 #include <gtest/gtest.h>
 #include <fstream>
 #include <cstdio>
+#include <stdexcept>
 #include "controller/SampleController.h"
 #include "repository/SampleRepository.h"
+#include "model/Order.h"
+#include <nlohmann/json.hpp>
 
 static void writeJson(const std::string& path, const std::string& content) {
     std::ofstream f(path);
@@ -113,4 +116,44 @@ TEST_F(Phase2Test, T2_10_PersistAndReload) {
     SampleRepository reloaded(path);
     EXPECT_EQ(reloaded.count(), 1);
     EXPECT_EQ(reloaded.findAll()[0].name, "웨이퍼A");
+}
+
+// T2-11: SampleRepository::update() — 성공
+TEST_F(Phase2Test, T2_11_UpdateExisting) {
+    SampleRepository repo(path);
+    repo.save({"S-001", "웨이퍼A", 0.5, 0.9, 0});
+    Sample updated{"S-001", "웨이퍼A", 0.5, 0.9, 200};
+    EXPECT_TRUE(repo.update(updated));
+    EXPECT_EQ(repo.findById("S-001")->stock, 200);
+}
+
+// T2-12: SampleRepository::update() — 없는 ID
+TEST_F(Phase2Test, T2_12_UpdateNonExisting) {
+    SampleRepository repo(path);
+    EXPECT_FALSE(repo.update({"S-999", "없음", 0.5, 0.9, 0}));
+}
+
+// T2-13: SampleRepository::save() — 중복 ID throw
+TEST_F(Phase2Test, T2_13_SaveDuplicateThrows) {
+    SampleRepository repo(path);
+    repo.save({"S-001", "웨이퍼A", 0.5, 0.9, 0});
+    EXPECT_THROW(repo.save({"S-001", "웨이퍼A", 0.5, 0.9, 0}), std::runtime_error);
+}
+
+// T2-14: SampleRepository::load() — 잘못된 JSON → 빈 리스트
+TEST_F(Phase2Test, T2_14_LoadInvalidJson) {
+    writeJson(path, "invalid json content");
+    SampleRepository repo(path);
+    EXPECT_EQ(repo.count(), 0);
+}
+
+// T2-15: Order/OrderStatus to_json 직렬화
+TEST_F(Phase2Test, T2_15_OrderToJson) {
+    Order o{"ORD-001", "S-001", "고객A", 10, OrderStatus::RESERVED, "", ""};
+    nlohmann::json j = o;
+    EXPECT_EQ(j["orderId"], "ORD-001");
+    EXPECT_EQ(j["status"], "RESERVED");
+
+    nlohmann::json js = OrderStatus::CONFIRMED;
+    EXPECT_EQ(js, "CONFIRMED");
 }
