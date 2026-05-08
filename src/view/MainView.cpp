@@ -65,7 +65,7 @@ void MainView::drawScreen(const SystemStatus& status) const {
     updateClock();
 
     // 커서를 입력 프롬프트 위치로 복귀
-    moveCursor(7, 9);   // "선택 > " 다음
+    moveCursor(INPUT_COL, INPUT_ROW);
 }
 
 int MainView::getChoice() const {
@@ -81,12 +81,12 @@ int MainView::getChoice() const {
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
         updateClock();
-        moveCursor(7, 9);
+        moveCursor(INPUT_COL, INPUT_ROW);
     }
 }
 
 void MainView::showInvalidInput() const {
-    moveCursor(0, 10);
+    moveCursor(0, INPUT_ROW + 1);
     std::cout << "  올바른 메뉴 번호를 입력하세요 (0~8).\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }

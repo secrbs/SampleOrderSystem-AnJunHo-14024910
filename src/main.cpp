@@ -27,7 +27,11 @@ int main() {
         // 각 기능은 이후 Phase에서 연결
     }
 
-    // 커서 복원
+    // 커서를 화면 아래로 이동 후 복원
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    COORD bottom{ 0, static_cast<SHORT>(csbi.dwCursorPosition.Y + 2) };
+    SetConsoleCursorPosition(hConsole, bottom);
     ci.bVisible = TRUE;
     SetConsoleCursorInfo(hConsole, &ci);
     return 0;
