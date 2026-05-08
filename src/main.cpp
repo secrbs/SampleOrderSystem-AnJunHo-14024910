@@ -9,10 +9,12 @@
 #include "controller/SampleController.h"
 #include "controller/OrderController.h"
 #include "controller/ApprovalController.h"
+#include "controller/MonitoringController.h"
 #include "view/MainView.h"
 #include "view/SampleView.h"
 #include "view/OrderView.h"
 #include "view/ApprovalView.h"
+#include "view/MonitorView.h"
 
 // 메뉴 번호 → 이름 매핑 (경로 표시용)
 static const std::map<int, std::string> MAIN_MENU_NAMES = {
@@ -188,8 +190,14 @@ int main() {
             case 1: runSampleManagement(sampleRepo, path); break;
             case 2: runOrderPlacement(sampleRepo, orderRepo, path); break;
             case 3: runApproval(sampleRepo, orderRepo, path); break;
-            // Phase 5~8: 이후 연결
-            case 4: case 5: case 6: case 7: case 8:
+            case 4: {
+                MonitoringController mc(sampleRepo, orderRepo);
+                MonitorView mv;
+                mv.showMonitoring(path, mc.getOrderSummary(), mc.getStockInfo());
+                break;
+            }
+            // Phase 6~8: 이후 연결
+            case 5: case 6: case 7: case 8:
                 // 미구현 메뉴 — 메인으로 돌아감 (별도 메시지 없음)
                 break;
             default:

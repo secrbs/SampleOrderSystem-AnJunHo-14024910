@@ -27,10 +27,9 @@ MonitoringController::MonitoringController(SampleRepository&amp; sampleRepo,
 <span style = "background-color:#dfd">std::vector&lt;StockInfo&gt; MonitoringController::getStockInfo() const {</span>
     // CONFIRMED ì£¼ë¬¸ ìë í©ì° (ìë£ë³)
 <span style = "background-color:#dfd">    std::map&lt;std::string, int&gt; confirmedQty;
-    for (const auto&amp; o : orderRepo_.findAll()) {
+    for (const auto&amp; o : orderRepo_.findAll())
         if (o.status == OrderStatus::CONFIRMED)
-            confirmedQty[o.sampleId] += o.quantity;
-    }</span>
+            confirmedQty[o.sampleId] += o.quantity;</span>
 
 <span style = "background-color:#dfd">    std::vector&lt;StockInfo&gt; result;
     for (const auto&amp; s : sampleRepo_.findAll()) {

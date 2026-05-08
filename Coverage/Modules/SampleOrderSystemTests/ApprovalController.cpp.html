@@ -40,11 +40,8 @@ ApprovalController::ApprovalController(SampleRepository&amp; sampleRepo,
 <span style = "background-color:#dfd">    it-&gt;updatedAt = currentTimestamp();</span>
 
 <span style = "background-color:#dfd">    if (sample-&gt;stock &gt;= it-&gt;quantity) {</span>
-        // ì¬ê³  ì¶©ë¶ â CONFIRMED, ì¬ê³  ì°¨ê°
+        // ì¬ê³  ì¶©ë¶ â CONFIRMED (ì¬ê³  ì°¨ê°ì ì¶ê³  ì ìí)
 <span style = "background-color:#dfd">        it-&gt;status = OrderStatus::CONFIRMED;
-        Sample updated = *sample;
-        updated.stock -= it-&gt;quantity;
-        sampleRepo_.update(updated);
     } else {</span>
         // ì¬ê³  ë¶ì¡± â PRODUCING, ìì°ë¼ì¸ í ë±ë¡
 <span style = "background-color:#dfd">        it-&gt;status = OrderStatus::PRODUCING;
