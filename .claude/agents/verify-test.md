@@ -42,9 +42,9 @@ OpenCppCoverage.exe
 
 ### 4. 보고서 열기
 
-Coverage 측정 완료 후 브라우저로 자동 실행:
+Coverage 측정 완료 후 기본 브라우저로 자동 실행:
 ```
-explorer C:\reviewer\SampleOrderSystem-AnJunHo-14024910\Coverage\index.html
+start C:\reviewer\SampleOrderSystem-AnJunHo-14024910\Coverage\index.html
 ```
 
 ## 출력 형식
