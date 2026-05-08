@@ -42,13 +42,15 @@ bin\Debug\SampleOrderSystemTests.exe
 아래 구조와 기술은 사전 PoC에서 검증된 방식을 그대로 적용한다.  
 구현 시 각 PoC repo의 코드를 참고한다.
 
-| 레이어 | 책임 | 참고 PoC repo |
-|--------|------|---------------|
-| Model | 도메인 데이터 구조 및 비즈니스 규칙 | - |
-| Repository | JSON 파일 읽기/쓰기 (영속성) | https://github.com/secrbs/DataPersistence-AnJunHo-14024910 |
-| Controller | 유스케이스 로직, Model/Repository 조합 | https://github.com/secrbs/ConsoleMVC-AnJunHo-14024910 |
-| View | 콘솔 입출력만 담당, 비즈니스 로직 없음 | https://github.com/secrbs/ConsoleMVC-AnJunHo-14024910 |
+| 레이어 | 책임 |
+|--------|------|
+| Model | 도메인 데이터 구조 및 비즈니스 규칙 |
+| Repository | JSON 파일 읽기/쓰기 (영속성) |
+| Controller | 유스케이스 로직, Model/Repository 조합 | 
+| View | 콘솔 입출력만 담당, 비즈니스 로직 없음 |
 
+- MVC 구조 : https://github.com/secrbs/ConsoleMVC-AnJunHo-14024910 참고
+- CRUD : https://github.com/secrbs/DataPersistence-AnJunHo-14024910 활용
 - 모니터링 기능 구현 시: https://github.com/secrbs/DataMonitor-AnJunHo-14024910 참고
 - 테스트 데이터 생성 시: https://github.com/secrbs/DummyDataGenerator-AnJunHo-14024910 활용
 
@@ -73,9 +75,10 @@ bin\Debug\SampleOrderSystemTests.exe
 
 | Phase | 명칭 | 상태 |
 |-------|------|------|
-| Phase 1 | 시료 관리 | 미시작 |
-| Phase 2 | 주문 접수 | 미시작 |
-| Phase 3 | 주문 승인/거절 | 미시작 |
-| Phase 4 | 생산라인 | 미시작 |
-| Phase 5 | 모니터링 | 미시작 |
-| Phase 6 | 출고 처리 | 미시작 |
+| Phase 1 | 메인 UI | 미시작 |
+| Phase 2 | 시료 관리 | 미시작 |
+| Phase 3 | 주문 접수 | 미시작 |
+| Phase 4 | 주문 승인/거절 | 미시작 |
+| Phase 5 | 생산라인 | 미시작 |
+| Phase 6 | 모니터링 | 미시작 |
+| Phase 7 | 출고 처리 | 미시작 |
