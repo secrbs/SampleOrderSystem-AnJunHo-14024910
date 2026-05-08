@@ -19,8 +19,8 @@ OrderController::OrderController(SampleRepository&amp; sampleRepo, OrderReposito
 <span style = "background-color:#dfd">    : sampleRepo_(sampleRepo), orderRepo_(orderRepo) {}</span>
 
 std::optional&lt;Order&gt; OrderController::placeOrder(const std::string&amp; sampleId,
-                                                  const std::string&amp; customerName,
-<span style = "background-color:#dfd">                                                  int quantity) {
+                                                   const std::string&amp; customerName,
+<span style = "background-color:#dfd">                                                   int quantity) {
     if (!sampleRepo_.findById(sampleId).has_value()) return std::nullopt;
     if (quantity &lt;= 0) return std::nullopt;</span>
 
@@ -42,20 +42,17 @@ std::optional&lt;Order&gt; OrderController::placeOrder(const std::string&amp; sa
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
     localtime_s(&amp;tm, &amp;t);</span>
-
-    char dateBuf[16];
+    char dateBuf[10];
 <span style = "background-color:#dfd">    std::strftime(dateBuf, sizeof(dateBuf), "%Y%m%d", &amp;tm);</span>
 
-    // ë¹ì¼ ì£¼ë¬¸ ì ê¸°ë° ìë²
 <span style = "background-color:#dfd">    int seq = 1;
-    for (const auto&amp; o : orderRepo_.findAll()) {
-        if (o.orderId.find(dateBuf) != std::string::npos)
-            ++seq;
-    }</span>
+    for (const auto&amp; o : orderRepo_.findAll())
+        if (o.orderId.find(dateBuf) != std::string::npos) ++seq;</span>
 
 <span style = "background-color:#dfd">    std::ostringstream oss;
-    oss &lt;&lt; "ORD-" &lt;&lt; dateBuf &lt;&lt; "-" &lt;&lt; std::setfill('0') &lt;&lt; std::setw(4) &lt;&lt; seq;
-    return oss.str();
+    oss &lt;&lt; "ORD-" &lt;&lt; dateBuf &lt;&lt; "-"</span>
+        &lt;&lt; std::setfill('0') &lt;&lt; std::setw(4) &lt;&lt; seq;
+<span style = "background-color:#dfd">    return oss.str();
 }</span>
 
 <span style = "background-color:#dfd">std::string OrderController::currentTimestamp() const {
@@ -63,7 +60,7 @@ std::optional&lt;Order&gt; OrderController::placeOrder(const std::string&amp; sa
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
     localtime_s(&amp;tm, &amp;t);</span>
-    char buf[32];
+    char buf[20];
 <span style = "background-color:#dfd">    std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", &amp;tm);
     return buf;
 }</span></pre>

@@ -34,9 +34,12 @@
     };
     std::string kw = toLower(keyword);
     std::vector&lt;Sample&gt; result;
-    for (const auto&amp; s : repo_.findAll())
-        if (toLower(s.name).find(kw) != std::string::npos)
-            result.push_back(s);
+    for (const auto&amp; s : repo_.findAll()) {</span>
+        // ID, ì´ë¦ ì¤ ì´ëë  keywordê° í¬í¨ëë©´ ê²ì
+<span style = "background-color:#dfd">        if (toLower(s.id).find(kw)   != std::string::npos ||</span>
+            toLower(s.name).find(kw) != std::string::npos)
+<span style = "background-color:#dfd">            result.push_back(s);
+    }
     return result;
 }</span>
 

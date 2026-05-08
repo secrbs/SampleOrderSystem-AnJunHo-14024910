@@ -28,6 +28,7 @@ struct Order {
 - 주문번호 자동 생성: `ORD-YYYYMMDD-NNNN` (당일 순번)
 - 생성된 주문 상태: RESERVED
 - 확인 후 [Y] 접수 / [N] 취소
+- 입력한 값과, 접수한 뒤 상태 정보 표시 필요
 
 ## 테스트 시나리오
 
@@ -41,7 +42,7 @@ struct Order {
 
 ## 완료 기준
 
-- [ ] Order 모델, OrderRepository 구현
+- [x] Order 모델, OrderRepository — Phase 1 완료
 - [ ] OrderController 주문 접수 로직 구현
-- [ ] OrderView 콘솔 UI 구현
+- [ ] OrderView 콘솔 UI 구현 (breadcrumb, 확인 화면, 결과 화면)
 - [ ] 모든 테스트 Green

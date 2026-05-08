@@ -7,8 +7,10 @@
 #include "repository/OrderRepository.h"
 #include "controller/MainController.h"
 #include "controller/SampleController.h"
+#include "controller/OrderController.h"
 #include "view/MainView.h"
 #include "view/SampleView.h"
+#include "view/OrderView.h"
 
 // 메뉴 번호 → 이름 매핑 (경로 표시용)
 static const std::map<int, std::string> MAIN_MENU_NAMES = {
@@ -17,6 +19,9 @@ static const std::map<int, std::string> MAIN_MENU_NAMES = {
 };
 static const std::map<int, std::string> SAMPLE_MENU_NAMES = {
     {1, "시료 등록"}, {2, "시료 목록"}, {3, "시료 검색"}
+};
+static const std::map<int, std::string> ORDER_MENU_NAMES = {
+    {1, "주문 접수"}
 };
 
 static std::string buildPath(const std::string& parent, int ch,
@@ -74,6 +79,36 @@ static void runSampleManagement(SampleRepository& sr, const std::string& path) {
     }
 }
 
+static void runOrderPlacement(SampleRepository& sr, OrderRepository& or_,
+                               const std::string& path) {
+    OrderController ctrl(sr, or_);
+    OrderView       view;
+
+    // 서브메뉴 없이 바로 주문 입력 진행
+    auto input = view.inputOrder(path);
+    if (!input.has_value()) return;  // 취소
+
+    auto sample = sr.findById(input->sampleId);
+    if (!sample.has_value()) {
+        view.showMessage("존재하지 않는 시료 ID입니다.");
+        std::cout << "\n"; _getch(); return;
+    }
+    if (input->quantity <= 0) {
+        view.showMessage("주문 수량은 1 이상이어야 합니다.");
+        std::cout << "\n"; _getch(); return;
+    }
+
+    if (!view.confirmOrder(path, *sample, *input)) return;
+
+    auto order = ctrl.placeOrder(input->sampleId, input->customerName, input->quantity);
+    if (order.has_value())
+        view.showResult(path, *order, *sample);
+    else {
+        view.showMessage("주문 접수에 실패했습니다.");
+        std::cout << "\n"; _getch();
+    }
+}
+
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
@@ -96,8 +131,9 @@ int main() {
 
         switch (choice) {
             case 1: runSampleManagement(sampleRepo, path); break;
-            // Phase 3~8: 이후 연결
-            case 2: case 3: case 4: case 5: case 6: case 7: case 8:
+            case 2: runOrderPlacement(sampleRepo, orderRepo, path); break;
+            // Phase 4~8: 이후 연결
+            case 3: case 4: case 5: case 6: case 7: case 8:
                 // 미구현 메뉴 — 메인으로 돌아감 (별도 메시지 없음)
                 break;
             default:

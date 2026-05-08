@@ -124,14 +124,17 @@ int SampleView::getChoice() const {
 
 std::optional<Sample> SampleView::inputSample() const {
     Sample s;
-    std::cout << "  ID            > "; std::cin >> s.id;
-    std::cin.ignore(1024, '\n');
+    std::cout << "  ID            > "; std::getline(std::cin, s.id);
     if (s.id.empty()) return std::nullopt;
     std::cout << "  이름          > "; std::getline(std::cin, s.name);
     if (s.name.empty()) return std::nullopt;
-    std::cout << "  평균 생산시간 > "; std::cin >> s.avgProductionTime;
-    std::cout << "  수율 (0~1)    > "; std::cin >> s.yield;
-    std::cin.ignore(1024, '\n');
+    std::string tStr, yStr;
+    std::cout << "  평균 생산시간 > "; std::getline(std::cin, tStr);
+    if (tStr.empty()) return std::nullopt;
+    std::cout << "  수율 (0~1)    > "; std::getline(std::cin, yStr);
+    if (yStr.empty()) return std::nullopt;
+    try { s.avgProductionTime = std::stod(tStr); s.yield = std::stod(yStr); }
+    catch (...) { return std::nullopt; }
     s.stock = 0;
     return s;
 }
