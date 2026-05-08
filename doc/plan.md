@@ -20,7 +20,7 @@ include/nlohmann/   - json.hpp
 
 | Phase | 명칭 | 설계 문서 | 상태 |
 |-------|------|-----------|------|
-| Phase 1 | 메인 UI | `doc/design/phase1_main_ui.md` | 미시작 |
+| Phase 1 | 메인 UI | `doc/design/phase1_main_ui.md` | 완료 |
 | Phase 2 | 시료 관리 | `doc/design/phase2_sample_management.md` | 미시작 |
 | Phase 3 | 주문 접수 | `doc/design/phase3_order_reservation.md` | 미시작 |
 | Phase 4 | 주문 승인/거절 | `doc/design/phase4_order_approval.md` | 미시작 |
