@@ -7,4 +7,3 @@ obj/
 *.ilk
 data/*.json
 packages/
-Coverage/
