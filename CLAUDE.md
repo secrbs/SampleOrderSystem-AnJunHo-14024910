@@ -150,6 +150,6 @@ OpenCppCoverage.exe --sources src --export_type=html:Coverage -- bin\Debug\Sampl
 | Phase 2 | 시료 관리 | 완료 |
 | Phase 3 | 주문 접수 | 완료 |
 | Phase 4 | 주문 승인/거절 | 완료 |
-| Phase 5 | 생산라인 | 미시작 |
+| Phase 5 | 생산라인 | 완료 |
 | Phase 6 | 모니터링 | 미시작 |
 | Phase 7 | 출고 처리 | 미시작 |

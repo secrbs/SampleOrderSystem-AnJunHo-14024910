@@ -106,9 +106,11 @@
     <ClCompile Include="controller\OrderController.cpp" />
     <ClCompile Include="controller\ApprovalController.cpp" />
     <ClCompile Include="controller\ProductionController.cpp" />
+    <ClCompile Include="controller\MonitoringController.cpp" />
     <ClCompile Include="view\MainView.cpp" />
     <ClCompile Include="view\SampleView.cpp" />
     <ClCompile Include="view\OrderView.cpp" />
+    <ClCompile Include="view\MonitorView.cpp" />
   </ItemGroup>
 
   <ItemGroup>
