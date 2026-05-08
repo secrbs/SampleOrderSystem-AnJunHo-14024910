@@ -21,13 +21,13 @@ struct Sample {
     int stock;
 };
 
-<span style = "background-color:#fdd">inline void to_json(nlohmann::json&amp; j, const Sample&amp; s) {
+<span style = "background-color:#dfd">inline void to_json(nlohmann::json&amp; j, const Sample&amp; s) {
     j = nlohmann::json{</span>
         {"id", s.id}, {"name", s.name},
         {"avgProductionTime", s.avgProductionTime},
         {"yield", s.yield}, {"stock", s.stock}
     };
-<span style = "background-color:#fdd">}</span>
+<span style = "background-color:#dfd">}</span>
 
 <span style = "background-color:#dfd">inline void from_json(const nlohmann::json&amp; j, Sample&amp; s) {
     j.at("id").get_to(s.id);

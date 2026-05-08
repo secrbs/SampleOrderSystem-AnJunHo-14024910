@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <optional>
 #include "../model/Sample.h"
 
 class SampleRepository {
@@ -8,6 +9,7 @@ public:
     explicit SampleRepository(const std::string& filePath);
 
     std::vector<Sample> findAll() const;
+    std::optional<Sample> findById(const std::string& id) const;
     int count() const;
     int totalStock() const;
 

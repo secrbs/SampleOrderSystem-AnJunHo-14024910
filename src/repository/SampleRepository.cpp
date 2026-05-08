@@ -2,6 +2,7 @@
 #include <fstream>
 #include <algorithm>
 #include <numeric>
+#include <optional>
 #include <stdexcept>
 
 SampleRepository::SampleRepository(const std::string& filePath)
@@ -11,6 +12,13 @@ SampleRepository::SampleRepository(const std::string& filePath)
 
 std::vector<Sample> SampleRepository::findAll() const {
     return samples_;
+}
+
+std::optional<Sample> SampleRepository::findById(const std::string& id) const {
+    auto it = std::find_if(samples_.begin(), samples_.end(),
+        [&id](const Sample& s) { return s.id == id; });
+    if (it == samples_.end()) return std::nullopt;
+    return *it;
 }
 
 int SampleRepository::count() const {

@@ -13,6 +13,7 @@
 #include &lt;fstream&gt;
 #include &lt;algorithm&gt;
 #include &lt;numeric&gt;
+#include &lt;optional&gt;
 #include &lt;stdexcept&gt;
 
 SampleRepository::SampleRepository(const std::string&amp; filePath)
@@ -20,8 +21,15 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
     load();
 }</span>
 
-<span style = "background-color:#fdd">std::vector&lt;Sample&gt; SampleRepository::findAll() const {
+<span style = "background-color:#dfd">std::vector&lt;Sample&gt; SampleRepository::findAll() const {
     return samples_;
+}</span>
+
+<span style = "background-color:#dfd">std::optional&lt;Sample&gt; SampleRepository::findById(const std::string&amp; id) const {
+    auto it = std::find_if(samples_.begin(), samples_.end(),
+        [&amp;id](const Sample&amp; s) { return s.id == id; });
+    if (it == samples_.end()) return std::nullopt;
+    return *it;
 }</span>
 
 <span style = "background-color:#dfd">int SampleRepository::count() const {
@@ -33,12 +41,12 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
         [](int sum, const Sample&amp; s) { return sum + s.stock; });
 }</span>
 
-<span style = "background-color:#fdd">void SampleRepository::save(const Sample&amp; sample) {
+<span style = "background-color:#dfd">void SampleRepository::save(const Sample&amp; sample) {
     auto it = std::find_if(samples_.begin(), samples_.end(),
         [&amp;sample](const Sample&amp; s) { return s.id == sample.id; });
-    if (it != samples_.end())
-        throw std::runtime_error("ID already exists: " + sample.id);
-    samples_.push_back(sample);
+    if (it != samples_.end())</span>
+<span style = "background-color:#fdd">        throw std::runtime_error("ID already exists: " + sample.id);</span>
+<span style = "background-color:#dfd">    samples_.push_back(sample);
     persist();
 }</span>
 
@@ -63,7 +71,7 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
     }</span>
 <span style = "background-color:#dfd">}</span>
 
-<span style = "background-color:#fdd">void SampleRepository::persist() const {
+<span style = "background-color:#dfd">void SampleRepository::persist() const {
     std::ofstream f(filePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + filePath_);
     f &lt;&lt; nlohmann::json(samples_).dump(2);
