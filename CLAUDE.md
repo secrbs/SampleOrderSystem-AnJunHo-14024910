@@ -5,6 +5,7 @@
 반도체 시료 생산주문관리 시스템 (S-Semi)  
 콘솔 기반 C++17 애플리케이션. MVC 아키텍처, JSON 파일 영속성, Google Test 기반 TDD.
 
+- 기능 요구사항: `doc/requirements.md`
 - 개발 계획: `doc/plan.md`
 
 ---
