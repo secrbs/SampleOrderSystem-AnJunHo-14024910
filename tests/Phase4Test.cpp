@@ -39,7 +39,7 @@ protected:
     const std::string queuePath  = "test_queue_p4.json";
 };
 
-// T4-01: 재고 충분 → CONFIRMED, 재고 차감
+// T4-01: 재고 충분 → CONFIRMED (재고 차감은 출고 시)
 TEST_F(Phase4Test, T4_01_ApproveWithSufficientStock) {
     SampleRepository   sr(samplePath);
     OrderRepository    or_(orderPath, queuePath);
@@ -50,7 +50,7 @@ TEST_F(Phase4Test, T4_01_ApproveWithSufficientStock) {
     auto it = std::find_if(orders.begin(), orders.end(),
         [](const Order& o){ return o.orderId == "ORD-001"; });
     EXPECT_EQ(it->status, OrderStatus::CONFIRMED);
-    EXPECT_EQ(sr.findById("S-001")->stock, 50);  // 100 - 50
+    EXPECT_EQ(sr.findById("S-001")->stock, 100);  // 재고 차감 없음
 }
 
 // T4-02: 재고 부족 → PRODUCING, 큐 등록
@@ -78,7 +78,7 @@ TEST_F(Phase4Test, T4_03_ApproveExactStock) {
     auto it = std::find_if(orders.begin(), orders.end(),
         [](const Order& o){ return o.orderId == "ORD-003"; });
     EXPECT_EQ(it->status, OrderStatus::CONFIRMED);
-    EXPECT_EQ(sr.findById("S-001")->stock, 0);
+    EXPECT_EQ(sr.findById("S-001")->stock, 100);  // 재고 차감 없음
 }
 
 // T4-04: 거절 → REJECTED, 재고 변화 없음

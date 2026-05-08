@@ -29,11 +29,8 @@ bool ApprovalController::approve(const std::string& orderId) {
     it->updatedAt = currentTimestamp();
 
     if (sample->stock >= it->quantity) {
-        // 재고 충분 → CONFIRMED, 재고 차감
+        // 재고 충분 → CONFIRMED (재고 차감은 출고 시 수행)
         it->status = OrderStatus::CONFIRMED;
-        Sample updated = *sample;
-        updated.stock -= it->quantity;
-        sampleRepo_.update(updated);
     } else {
         // 재고 부족 → PRODUCING, 생산라인 큐 등록
         it->status = OrderStatus::PRODUCING;
