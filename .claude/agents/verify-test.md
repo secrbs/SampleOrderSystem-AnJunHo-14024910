@@ -31,27 +31,18 @@ C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.
 
 OpenCppCoverage 경로: `C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe`
 
+프로젝트 디렉토리(`C:\reviewer\SampleOrderSystem-AnJunHo-14024910`)에서 실행:
 ```
-OpenCppCoverage.exe
-  --sources C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src
-  --export_type html:C:\reviewer\SampleOrderSystem-AnJunHo-14024910\Coverage
-  -- C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.exe
+"C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources src --export_type "html:Coverage" -- "C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.exe"
 ```
 
 결과 위치: `Coverage\index.html`
-
-### 4. 보고서 열기
-
-Coverage 측정 완료 후 기본 브라우저로 자동 실행:
-```
-start C:\reviewer\SampleOrderSystem-AnJunHo-14024910\Coverage\index.html
-```
 
 ## 출력 형식
 
 ```
 [테스트 검증 결과]
-빌드 (메인):  ✅ 성공 / ❌ 실패 (오류 메시지)
+빌드 (메인):   ✅ 성공 / ❌ 실패 (오류 메시지)
 빌드 (테스트): ✅ 성공 / ❌ 실패 (오류 메시지)
 테스트: N개 중 N개 통과 (N개 실패)
 Coverage: 측정 완료 → Coverage\index.html
