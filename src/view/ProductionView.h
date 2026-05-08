@@ -7,9 +7,7 @@
 class ProductionView {
 public:
     void showStatus(const std::optional<ProductionJob>& current,
-                    const std::vector<ProductionJob>& queue) const;
-    void showMenu() const;
-    int  getChoice() const;
-    void showCompleteResult() const;
+                    const std::vector<ProductionJob>& queue,
+                    double elapsedMinutes) const;
     void showMessage(const std::string& msg) const;
 };

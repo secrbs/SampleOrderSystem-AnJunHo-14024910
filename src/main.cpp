@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <iostream>
+#include <conio.h>
 #include "repository/SampleRepository.h"
 #include "repository/OrderRepository.h"
 #include "controller/MainController.h"
@@ -85,21 +86,12 @@ static void runMonitoring(SampleRepository& sr, OrderRepository& or_) {
     view.showStockInfo(ctrl.getStockInfo());
 }
 
-// [5] 생산라인 조회
+// [5] 생산라인 조회 (조회 전용)
 static void runProductionLine(SampleRepository& sr, OrderRepository& or_) {
     ProductionController ctrl(sr, or_);
     ProductionView       view;
-    while (true) {
-        view.showStatus(ctrl.getCurrentJob(), ctrl.getQueue());
-        view.showMenu();
-        int ch = view.getChoice();
-        if (ch == 0) break;
-        if (ch == 1) {
-            if (!ctrl.getCurrentJob().has_value()) { view.showMessage("처리 중인 작업이 없습니다."); continue; }
-            ctrl.completeCurrentJob();
-            view.showCompleteResult();
-        }
-    }
+    view.showStatus(ctrl.getCurrentJob(), ctrl.getQueue(), ctrl.getElapsedMinutes());
+    _getch();
 }
 
 // [6] 출고 처리
@@ -128,6 +120,12 @@ int main() {
     MainView         mainView;
 
     while (true) {
+        // 생산 자동 완료 체크 (메인 메뉴 진입 시마다)
+        {
+            ProductionController prodCtrl(sampleRepo, orderRepo);
+            while (prodCtrl.checkAndAutoComplete()) {}  // 완료된 작업이 여러 개일 수 있음
+        }
+
         mainView.showMenu(mainCtrl.getSystemStatus());
         int choice = mainView.getChoice();
         switch (choice) {

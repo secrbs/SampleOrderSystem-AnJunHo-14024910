@@ -12,13 +12,16 @@ public:
     int    calcActualProduction(int shortage, double yield) const;
     double calcTotalTime(double avgTime, int actualProduction) const;
 
-    std::vector<ProductionJob>      getQueue() const;
-    std::optional<ProductionJob>    getCurrentJob() const;
-    bool                            completeCurrentJob();
+    std::vector<ProductionJob>   getQueue() const;
+    std::optional<ProductionJob> getCurrentJob() const;
+    double                       getElapsedMinutes() const;
+    bool                         checkAndAutoComplete();
+    bool                         completeCurrentJob();
 
 private:
     SampleRepository& sampleRepo_;
     OrderRepository&  orderRepo_;
 
+    time_t parseTimestamp(const std::string& ts) const;
     std::string currentTimestamp() const;
 };
