@@ -1,11 +1,11 @@
-﻿#include "MainView.h"
+#include "MainView.h"
 #include <iostream>
 #include <iomanip>
 #include <chrono>
 #include <ctime>
+#include <conio.h>
 
 void MainView::showMenu(const SystemStatus& status) const {
-    // 현재 시각
     auto now = std::chrono::system_clock::now();
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
@@ -31,14 +31,10 @@ void MainView::showMenu(const SystemStatus& status) const {
 }
 
 int MainView::getChoice() const {
-    int choice = -1;
-    std::cin >> choice;
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(1024, '\n');
-        return -1;
-    }
-    return choice;
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
+    if (ch >= '0' && ch <= '9') return ch - '0';
+    return -1;
 }
 
 void MainView::showStub(int menuNum) const {

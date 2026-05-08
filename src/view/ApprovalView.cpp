@@ -1,6 +1,7 @@
 #include "ApprovalView.h"
 #include <iostream>
 #include <iomanip>
+#include <conio.h>
 
 void ApprovalView::showReservedOrders(const std::vector<Order>& orders) const {
     if (orders.empty()) {
@@ -26,13 +27,14 @@ std::string ApprovalView::getOrderId() const {
     std::cout << "\n  주문번호 > ";
     std::string id;
     std::cin >> id;
+    std::cin.ignore(1024, '\n');
     return id;
 }
 
 char ApprovalView::getApproveOrReject() const {
     std::cout << "  [Y] 승인  [N] 거절  [0] 취소 > ";
-    char ch;
-    std::cin >> ch;
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
     return ch;
 }
 

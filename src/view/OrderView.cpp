@@ -1,6 +1,7 @@
-﻿#include "OrderView.h"
+#include "OrderView.h"
 #include <iostream>
 #include <iomanip>
+#include <conio.h>
 
 void OrderView::showMenu() const {
     std::cout << "\n[ 시료 주문 ]\n";
@@ -10,23 +11,20 @@ void OrderView::showMenu() const {
 }
 
 int OrderView::getChoice() const {
-    int choice = -1;
-    std::cin >> choice;
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(1024, '\n');
-        return -1;
-    }
-    return choice;
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
+    if (ch >= '0' && ch <= '9') return ch - '0';
+    return -1;
 }
 
 void OrderView::inputOrderInfo(std::string& sampleId,
                                 std::string& customerName,
                                 int& quantity) const {
     std::cout << "  시료 ID  > "; std::cin >> sampleId;
-    std::cout << "  고객명   > ";
-    std::cin.ignore(); std::getline(std::cin, customerName);
+    std::cin.ignore(1024, '\n');
+    std::cout << "  고객명   > "; std::getline(std::cin, customerName);
     std::cout << "  주문 수량 > "; std::cin >> quantity;
+    std::cin.ignore(1024, '\n');
 }
 
 bool OrderView::confirmOrder(const Sample& sample,
@@ -37,8 +35,8 @@ bool OrderView::confirmOrder(const Sample& sample,
     std::cout << "  고객   : " << customerName << "\n";
     std::cout << "  수량   : " << quantity << " ea\n";
     std::cout << "  [Y] 접수  [N] 취소 > ";
-    char ch;
-    std::cin >> ch;
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
     return (ch == 'Y' || ch == 'y');
 }
 

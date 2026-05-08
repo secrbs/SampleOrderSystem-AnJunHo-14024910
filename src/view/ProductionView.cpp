@@ -1,6 +1,7 @@
 #include "ProductionView.h"
 #include <iostream>
 #include <iomanip>
+#include <conio.h>
 
 void ProductionView::showStatus(const std::optional<ProductionJob>& current,
                                  const std::vector<ProductionJob>& queue) const {
@@ -22,7 +23,7 @@ void ProductionView::showStatus(const std::optional<ProductionJob>& current,
     std::cout << "\n  대기 중인 작업 (" << (queue.empty() ? 0 : queue.size() - 1) << "건)\n";
     bool first = true;
     for (const auto& j : queue) {
-        if (first) { first = false; continue; }  // current는 제외
+        if (first) { first = false; continue; }
         std::cout << "    " << std::left
                   << std::setw(22) << j.orderId
                   << std::setw(10) << j.sampleId
@@ -35,8 +36,8 @@ void ProductionView::showMenu() const {
 }
 
 int ProductionView::getChoice() const {
-    char ch;
-    std::cin >> ch;
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
     if (ch == 'C' || ch == 'c') return 1;
     if (ch == '0') return 0;
     return -1;

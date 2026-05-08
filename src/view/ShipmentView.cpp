@@ -26,6 +26,7 @@ std::string ShipmentView::getOrderId() const {
     std::cout << "\n  출고할 주문번호 > ";
     std::string id;
     std::cin >> id;
+    std::cin.ignore(1024, '\n');
     return id;
 }
 

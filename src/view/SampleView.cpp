@@ -1,6 +1,7 @@
-﻿#include "SampleView.h"
+#include "SampleView.h"
 #include <iostream>
 #include <iomanip>
+#include <conio.h>
 
 void SampleView::showMenu() const {
     std::cout << "\n[ 시료 관리 ]\n";
@@ -12,30 +13,27 @@ void SampleView::showMenu() const {
 }
 
 int SampleView::getChoice() const {
-    int choice = -1;
-    std::cin >> choice;
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(1024, '\n');
-        return -1;
-    }
-    return choice;
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
+    if (ch >= '0' && ch <= '9') return ch - '0';
+    return -1;
 }
 
 Sample SampleView::inputSample() const {
     Sample s;
     std::cout << "  ID             > "; std::cin >> s.id;
-    std::cout << "  이름           > ";
-    std::cin.ignore(); std::getline(std::cin, s.name);
+    std::cin.ignore(1024, '\n');
+    std::cout << "  이름           > "; std::getline(std::cin, s.name);
     std::cout << "  평균 생산시간  > "; std::cin >> s.avgProductionTime;
     std::cout << "  수율 (0~1)     > "; std::cin >> s.yield;
+    std::cin.ignore(1024, '\n');
     s.stock = 0;
     return s;
 }
 
 std::string SampleView::inputSearchKeyword() const {
     std::cout << "  검색어 > ";
-    std::cin.ignore();
+    std::cin.ignore(1024, '\n');
     std::string kw;
     std::getline(std::cin, kw);
     return kw;
