@@ -33,7 +33,7 @@ OpenCppCoverage 경로: `C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe`
 
 프로젝트 디렉토리(`C:\reviewer\SampleOrderSystem-AnJunHo-14024910`)에서 실행:
 ```
-"C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources src --export_type "html:Coverage" -- "C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.exe"
+"C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources src --modules "C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.exe" --export_type "html:Coverage" -- "C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.exe"
 ```
 
 결과 위치: `Coverage\index.html`
