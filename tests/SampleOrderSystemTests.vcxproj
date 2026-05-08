@@ -110,6 +110,7 @@
     <ClCompile Include="Phase2Test.cpp" />
     <ClCompile Include="Phase3Test.cpp" />
     <ClCompile Include="Phase4Test.cpp" />
+    <ClCompile Include="Phase5Test.cpp" />
   </ItemGroup>
 
   <!-- src/ 비즈니스 로직 소스 파일 (main.cpp 제외) -->
@@ -120,6 +121,7 @@
     <ClCompile Include="$(SolutionDir)src\controller\SampleController.cpp" />
     <ClCompile Include="$(SolutionDir)src\controller\OrderController.cpp" />
     <ClCompile Include="$(SolutionDir)src\controller\ApprovalController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\ProductionController.cpp" />
     <ClCompile Include="$(SolutionDir)src\view\MainView.cpp" />
     <ClCompile Include="$(SolutionDir)src\view\SampleView.cpp" />
     <ClCompile Include="$(SolutionDir)src\view\OrderView.cpp" />

@@ -67,6 +67,13 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     persistQueue();
 }</span>
 
+<span style = "background-color:#dfd">void OrderRepository::dequeueJob() {
+    if (!queue_.empty()) {
+        queue_.erase(queue_.begin());
+        persistQueue();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
 <span style = "background-color:#dfd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const {
     return queue_;
 }</span>

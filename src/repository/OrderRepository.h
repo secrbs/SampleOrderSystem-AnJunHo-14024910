@@ -16,6 +16,7 @@ public:
     bool update(const Order& order);
 
     void enqueueJob(const ProductionJob& job);
+    void dequeueJob();
     std::vector<ProductionJob> getQueue() const;
 
 private:

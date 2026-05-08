@@ -56,6 +56,13 @@ void OrderRepository::enqueueJob(const ProductionJob& job) {
     persistQueue();
 }
 
+void OrderRepository::dequeueJob() {
+    if (!queue_.empty()) {
+        queue_.erase(queue_.begin());
+        persistQueue();
+    }
+}
+
 std::vector<ProductionJob> OrderRepository::getQueue() const {
     return queue_;
 }
