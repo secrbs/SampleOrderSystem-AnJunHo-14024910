@@ -6,30 +6,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx</Extensions>
     </Filter>
-    <Filter Include="Source Files\repository">
-      <UniqueIdentifier>{AAA00001-0001-0001-0001-000000000001}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\controller">
-      <UniqueIdentifier>{AAA00002-0002-0002-0002-000000000002}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\view">
-      <UniqueIdentifier>{AAA00003-0003-0003-0003-000000000003}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx</Extensions>
-    </Filter>
-    <Filter Include="Header Files\model">
-      <UniqueIdentifier>{BBB00001-0001-0001-0001-000000000001}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\repository">
-      <UniqueIdentifier>{BBB00002-0002-0002-0002-000000000002}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\controller">
-      <UniqueIdentifier>{BBB00003-0003-0003-0003-000000000003}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\view">
-      <UniqueIdentifier>{BBB00004-0004-0004-0004-000000000004}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 
@@ -37,114 +16,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="repository\SampleRepository.cpp">
-      <Filter>Source Files\repository</Filter>
-    </ClCompile>
-    <ClCompile Include="repository\OrderRepository.cpp">
-      <Filter>Source Files\repository</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\MainController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\SampleController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\OrderController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\ApprovalController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\ProductionController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\MonitoringController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="controller\ShipmentController.cpp">
-      <Filter>Source Files\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="view\MainView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="view\SampleView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="view\OrderView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="view\MonitorView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="view\ShipmentView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="view\ApprovalView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="view\ProductionView.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ClInclude Include="model\Sample.h">
-      <Filter>Header Files\model</Filter>
-    </ClInclude>
-    <ClInclude Include="model\Order.h">
-      <Filter>Header Files\model</Filter>
-    </ClInclude>
-    <ClInclude Include="model\SystemStatus.h">
-      <Filter>Header Files\model</Filter>
-    </ClInclude>
-    <ClInclude Include="repository\SampleRepository.h">
-      <Filter>Header Files\repository</Filter>
-    </ClInclude>
-    <ClInclude Include="repository\OrderRepository.h">
-      <Filter>Header Files\repository</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\MainController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\SampleController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\OrderController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\ApprovalController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\ProductionController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\MonitoringController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="controller\ShipmentController.h">
-      <Filter>Header Files\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="view\MainView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="view\SampleView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="view\OrderView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="view\MonitorView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="view\ShipmentView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="view\ApprovalView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="view\ProductionView.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
   </ItemGroup>
 
 </Project>

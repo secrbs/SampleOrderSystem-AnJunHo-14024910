@@ -83,45 +83,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <!-- 소스 파일 (Phase 진행에 따라 추가) -->
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="repository\SampleRepository.cpp" />
-    <ClCompile Include="repository\OrderRepository.cpp" />
-    <ClCompile Include="controller\MainController.cpp" />
-    <ClCompile Include="controller\SampleController.cpp" />
-    <ClCompile Include="controller\OrderController.cpp" />
-    <ClCompile Include="controller\ApprovalController.cpp" />
-    <ClCompile Include="controller\ProductionController.cpp" />
-    <ClCompile Include="controller\MonitoringController.cpp" />
-    <ClCompile Include="view\MainView.cpp" />
-    <ClCompile Include="view\SampleView.cpp" />
-    <ClCompile Include="view\OrderView.cpp" />
-    <ClCompile Include="view\MonitorView.cpp" />
-    <ClCompile Include="controller\ShipmentController.cpp" />
-    <ClCompile Include="view\ShipmentView.cpp" />
-    <ClCompile Include="view\ApprovalView.cpp" />
-    <ClCompile Include="view\ProductionView.cpp" />
   </ItemGroup>
+  <!-- 헤더 파일 (Phase 진행에 따라 추가) -->
   <ItemGroup>
-    <ClInclude Include="model\Sample.h" />
-    <ClInclude Include="model\Order.h" />
-    <ClInclude Include="model\SystemStatus.h" />
-    <ClInclude Include="repository\SampleRepository.h" />
-    <ClInclude Include="repository\OrderRepository.h" />
-    <ClInclude Include="controller\MainController.h" />
-    <ClInclude Include="controller\SampleController.h" />
-    <ClInclude Include="controller\OrderController.h" />
-    <ClInclude Include="controller\ApprovalController.h" />
-    <ClInclude Include="controller\ProductionController.h" />
-    <ClInclude Include="controller\MonitoringController.h" />
-    <ClInclude Include="controller\ShipmentController.h" />
-    <ClInclude Include="view\MainView.h" />
-    <ClInclude Include="view\SampleView.h" />
-    <ClInclude Include="view\OrderView.h" />
-    <ClInclude Include="view\MonitorView.h" />
-    <ClInclude Include="view\ShipmentView.h" />
-    <ClInclude Include="view\ApprovalView.h" />
-    <ClInclude Include="view\ProductionView.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

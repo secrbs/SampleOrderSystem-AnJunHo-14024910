@@ -104,35 +104,13 @@
     </Link>
   </ItemDefinitionGroup>
 
+  <!-- 테스트 파일 (Phase 진행에 따라 추가) -->
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
-    <ClCompile Include="Phase1Test.cpp" />
-    <ClCompile Include="Phase2Test.cpp" />
-    <ClCompile Include="Phase3Test.cpp" />
-    <ClCompile Include="Phase4Test.cpp" />
-    <ClCompile Include="Phase5Test.cpp" />
-    <ClCompile Include="Phase6Test.cpp" />
-    <ClCompile Include="Phase7Test.cpp" />
-    <ClCompile Include="Phase8Test.cpp" />
   </ItemGroup>
 
-  <!-- src/ 비즈니스 로직 소스 파일 (main.cpp 제외) -->
+  <!-- src/ 비즈니스 로직 소스 파일 (Phase 진행에 따라 추가, main.cpp 제외) -->
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)src\repository\SampleRepository.cpp" />
-    <ClCompile Include="$(SolutionDir)src\repository\OrderRepository.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\MainController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\SampleController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\OrderController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\ApprovalController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\ProductionController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\MonitoringController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\view\MainView.cpp" />
-    <ClCompile Include="$(SolutionDir)src\view\SampleView.cpp" />
-    <ClCompile Include="$(SolutionDir)src\view\OrderView.cpp" />
-    <ClCompile Include="$(SolutionDir)src\controller\ShipmentController.cpp" />
-    <ClCompile Include="$(SolutionDir)src\view\ShipmentView.cpp" />
-    <ClCompile Include="$(SolutionDir)src\view\ApprovalView.cpp" />
-    <ClCompile Include="$(SolutionDir)src\view\ProductionView.cpp" />
   </ItemGroup>
 
   <!-- NuGet 참조 -->
