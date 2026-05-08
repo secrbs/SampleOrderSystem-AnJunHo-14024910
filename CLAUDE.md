@@ -5,9 +5,7 @@
 반도체 시료 생산주문관리 시스템 (S-Semi)  
 콘솔 기반 C++17 애플리케이션. MVC 아키텍처, JSON 파일 영속성, Google Test 기반 TDD.
 
-- 기능 요구사항: `doc/requirements.md`
 - 개발 계획: `doc/plan.md`
-- Phase별 설계: `doc/design/phase*.md`
 
 ---
 
@@ -97,6 +95,9 @@ PR 생성 시 아래 내용을 PR description에 포함한다.
 # Visual Studio 2022에서 SampleOrderSystem.sln 열기 → 빌드
 # 테스트 실행
 bin\Debug\SampleOrderSystemTests.exe
+
+# 커버리지 측정 (결과는 .\Coverage\index.html 에서 확인)
+OpenCppCoverage.exe --sources src --export_type=html:Coverage -- bin\Debug\SampleOrderSystemTests.exe
 ```
 
 ---

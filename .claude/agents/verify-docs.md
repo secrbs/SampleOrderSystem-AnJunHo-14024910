@@ -1,6 +1,6 @@
 ---
 name: verify-docs
-description: 문서 정합성 검증 SubAgent. CLAUDE.md, requirements.md, phase 설계 문서 간 충돌/불일치를 탐지한다.
+description: 문서 정합성 검증 SubAgent. CLAUDE.md, plan.md, phase 설계 문서 간 충돌/불일치를 탐지한다.
 tools:
   - Read
   - Glob
@@ -17,9 +17,9 @@ tools:
    - Phase 현황 표가 실제 설계 문서와 일치하는지 확인
    - 아키텍처 규칙이 design doc과 충돌하지 않는지 확인
 
-2. **requirements.md ↔ phase 설계 문서 일치 여부**
-   - 요구사항에 명시된 기능이 설계 문서에 반영되어 있는지 확인
-   - 설계 문서의 테스트 시나리오가 요구사항을 커버하는지 확인
+2. **plan.md ↔ phase 설계 문서 일치 여부**
+   - plan.md의 Phase 목록과 실제 설계 문서 파일이 일치하는지 확인
+   - 설계 문서의 테스트 시나리오가 plan.md의 기능 범위를 커버하는지 확인
 
 3. **설계 문서 ↔ 구현 코드 일치 여부** (구현 후 검증 시)
    - 설계 문서의 도메인 모델이 실제 코드에 반영되어 있는지 확인
