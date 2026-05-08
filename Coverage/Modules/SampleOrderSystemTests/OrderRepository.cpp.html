@@ -54,10 +54,10 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
 <span style = "background-color:#dfd">            nlohmann::json j;
             f &gt;&gt; j;
             vec = j.get&lt;std::decay_t&lt;decltype(vec)&gt;&gt;();
-        } catch (...) {</span>
-<span style = "background-color:#fdd">            vec.clear();
-        }</span>
-<span style = "background-color:#dfd">    };
+        } catch (...) {
+            vec.clear();
+        }
+    };
     loadFile(orderFilePath_, orders_);
     loadFile(queueFilePath_, queue_);
 }</span>
@@ -67,7 +67,7 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     persistQueue();
 }</span>
 
-<span style = "background-color:#fdd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const {
+<span style = "background-color:#dfd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const {
     return queue_;
 }</span>
 

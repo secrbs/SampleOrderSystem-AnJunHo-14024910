@@ -115,3 +115,22 @@ TEST_F(Phase4Test, T4_06_GetReservedOrders) {
     for (const auto& o : reserved)
         EXPECT_EQ(o.status, OrderStatus::RESERVED);
 }
+
+// T4-07: getQueue — 큐 항목 조회
+TEST_F(Phase4Test, T4_07_GetQueue) {
+    SampleRepository sr(samplePath);
+    OrderRepository  or_(orderPath, queuePath);
+    ApprovalController ctrl(sr, or_);
+
+    ctrl.approve("ORD-002");  // 재고 부족 → 큐 등록
+    auto queue = or_.getQueue();
+    EXPECT_EQ(queue.size(), 1u);
+    EXPECT_EQ(queue[0].orderId, "ORD-002");
+}
+
+// T4-08: OrderRepository::load() — 큐 파일 잘못된 JSON
+TEST_F(Phase4Test, T4_08_LoadInvalidQueueJson) {
+    writeJson(queuePath, "not valid json");
+    OrderRepository or_(orderPath, queuePath);
+    EXPECT_EQ(or_.productionQueueCount(), 0);
+}
