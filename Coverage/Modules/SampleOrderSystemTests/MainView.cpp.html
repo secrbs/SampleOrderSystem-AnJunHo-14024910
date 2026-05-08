@@ -87,6 +87,7 @@ static const int WIDTH = 62;
                 char ch = static_cast&lt;char&gt;(_getch());
                 std::cout &lt;&lt; ch &lt;&lt; "\n";
                 if (ch &gt;= '0' &amp;&amp; ch &lt;= '9') return ch - '0';
+                if (ch == '\r' || ch == '\n') return -2;  // ë¹ì¹¸ = ì¢ë£ íì¸
                 return -1;</span>
             }
 <span style = "background-color:#fdd">            std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -100,6 +101,14 @@ static const int WIDTH = 62;
     moveCursor(0, INPUT_ROW + 1);
     std::cout &lt;&lt; "  ì¬ë°ë¥¸ ë©ë´ ë²í¸ë¥¼ ìë ¥íì¸ì (0~8).\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
+}</span>
+
+<span style = "background-color:#fdd">bool MainView::confirmExit() const {
+    moveCursor(0, INPUT_ROW + 1);
+    std::cout &lt;&lt; "  ì¢ë£íìê² ìµëê¹? [Y/N] &gt; ";
+    char ch = static_cast&lt;char&gt;(_getch());
+    std::cout &lt;&lt; ch &lt;&lt; "\n";
+    return (ch == 'Y' || ch == 'y');
 }</span></pre>
         <hr />
         <table width="100%">

@@ -43,6 +43,6 @@ struct Order {
 ## 완료 기준
 
 - [x] Order 모델, OrderRepository — Phase 1 완료
-- [ ] OrderController 주문 접수 로직 구현
-- [ ] OrderView 콘솔 UI 구현 (breadcrumb, 확인 화면, 결과 화면)
-- [ ] 모든 테스트 Green
+- [x] OrderController 주문 접수 로직 구현
+- [x] OrderView 콘솔 UI 구현 (breadcrumb, 확인 화면, 결과 화면)
+- [x] 모든 테스트 Green

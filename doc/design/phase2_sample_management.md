@@ -56,6 +56,6 @@ struct Sample {
 ## 완료 기준
 
 - [x] Sample 모델, SampleRepository — Phase 1 완료
-- [ ] SampleController 등록/조회/검색 로직 구현
-- [ ] SampleView 콘솔 UI 구현
-- [ ] 모든 테스트 Green
+- [x] SampleController 등록/조회/검색 로직 구현
+- [x] SampleView 콘솔 UI 구현
+- [x] 모든 테스트 Green
