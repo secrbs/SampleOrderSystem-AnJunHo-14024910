@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../repository/SampleRepository.h"
 #include "../repository/OrderRepository.h"
 #include "../model/SystemStatus.h"
