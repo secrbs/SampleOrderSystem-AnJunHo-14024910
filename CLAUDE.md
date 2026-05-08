@@ -39,19 +39,18 @@ bin\Debug\SampleOrderSystemTests.exe
 
 ## 아키텍처 규칙
 
-아래 구조와 기술은 사전 PoC에서 검증된 방식을 그대로 적용한다.
+아래 구조와 기술은 사전 PoC에서 검증된 방식을 그대로 적용한다.  
+구현 시 각 PoC repo의 코드를 참고한다.
 
-| 레이어 | 책임 | 검증 PoC |
-|--------|------|----------|
+| 레이어 | 책임 | 참고 PoC repo |
+|--------|------|---------------|
 | Model | 도메인 데이터 구조 및 비즈니스 규칙 | - |
-| Repository | JSON 파일 읽기/쓰기 (영속성) | PoC-2 DataPersistence |
-| Controller | 유스케이스 로직, Model/Repository 조합 | PoC-1 ConsoleMVC |
-| View | 콘솔 입출력만 담당, 비즈니스 로직 없음 | PoC-1 ConsoleMVC |
+| Repository | JSON 파일 읽기/쓰기 (영속성) | https://github.com/secrbs/DataPersistence-AnJunHo-14024910 |
+| Controller | 유스케이스 로직, Model/Repository 조합 | https://github.com/secrbs/ConsoleMVC-AnJunHo-14024910 |
+| View | 콘솔 입출력만 담당, 비즈니스 로직 없음 | https://github.com/secrbs/ConsoleMVC-AnJunHo-14024910 |
 
-- MVC 레이어 분리 방식: PoC-1(ConsoleMVC)에서 검증
-- JSON 영속성 (nlohmann/json 기반 Repository): PoC-2(DataPersistence)에서 검증
-- 모니터링 화면 구성 (주문 현황 + 재고 상태): PoC-3(DataMonitor)에서 검증
-- 테스트용 더미 데이터 생성: PoC-4(DummyDataGenerator) 활용
+- 모니터링 기능 구현 시: https://github.com/secrbs/DataMonitor-AnJunHo-14024910 참고
+- 테스트 데이터 생성 시: https://github.com/secrbs/DummyDataGenerator-AnJunHo-14024910 활용
 
 규칙:
 - Controller는 View를 직접 참조하지 않는다.
@@ -63,7 +62,7 @@ bin\Debug\SampleOrderSystemTests.exe
 - 언어: C++17
 - 빌드: Visual Studio 2022 (v143, x64)
 - 테스트: Google Test (NuGet)
-- JSON: nlohmann/json (`include/nlohmann/json.hpp`) — PoC-2에서 검증
+- JSON: nlohmann/json (`include/nlohmann/json.hpp`)
 - 데이터: `data/samples.json`, `data/orders.json`, `data/production_queue.json`
 - 주석: 비자명한 이유가 있을 때만 작성
 - `using namespace std;` 전역 사용 금지
