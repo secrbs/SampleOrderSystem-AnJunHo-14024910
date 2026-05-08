@@ -106,8 +106,16 @@
     <ClInclude Include="repository\OrderRepository.h" />
     <ClInclude Include="controller\MainController.h" />
     <ClInclude Include="controller\SampleController.h" />
-    <ClInclude Include="view\SampleView.h" />
+    <ClInclude Include="controller\OrderController.h" />
+    <ClInclude Include="controller\ApprovalController.h" />
+    <ClInclude Include="controller\ProductionController.h" />
+    <ClInclude Include="controller\MonitoringController.h" />
+    <ClInclude Include="controller\ShipmentController.h" />
     <ClInclude Include="view\MainView.h" />
+    <ClInclude Include="view\SampleView.h" />
+    <ClInclude Include="view\OrderView.h" />
+    <ClInclude Include="view\MonitorView.h" />
+    <ClInclude Include="view\ShipmentView.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
