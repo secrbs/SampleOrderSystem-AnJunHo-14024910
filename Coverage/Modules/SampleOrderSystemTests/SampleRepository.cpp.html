@@ -11,70 +11,52 @@
         <pre class="prettyprint lang-cpp linenums">
 #include "SampleRepository.h"
 #include &lt;fstream&gt;
-#include &lt;algorithm&gt;
 #include &lt;numeric&gt;
-#include &lt;optional&gt;
+#include &lt;algorithm&gt;
 #include &lt;stdexcept&gt;
 
 SampleRepository::SampleRepository(const std::string&amp; filePath)
-<span style = "background-color:#dfd">    : filePath_(filePath) {
-    load();
+<span style = "background-color:#dfd">    : filePath_(filePath) { load(); }</span>
+
+<span style = "background-color:#fdd">std::vector&lt;Sample&gt; SampleRepository::findAll() const { return items_; }</span>
+
+<span style = "background-color:#fdd">std::optional&lt;Sample&gt; SampleRepository::findById(const std::string&amp; id) const {
+    auto it = std::find_if(items_.begin(), items_.end(),
+        [&amp;id](const Sample&amp; s){ return s.id == id; });
+    return it == items_.end() ? std::nullopt : std::optional&lt;Sample&gt;(*it);
 }</span>
 
-<span style = "background-color:#dfd">std::vector&lt;Sample&gt; SampleRepository::findAll() const {
-    return samples_;
-}</span>
-
-<span style = "background-color:#dfd">std::optional&lt;Sample&gt; SampleRepository::findById(const std::string&amp; id) const {
-    auto it = std::find_if(samples_.begin(), samples_.end(),
-        [&amp;id](const Sample&amp; s) { return s.id == id; });
-    if (it == samples_.end()) return std::nullopt;
-    return *it;
-}</span>
-
-<span style = "background-color:#dfd">int SampleRepository::count() const {
-    return static_cast&lt;int&gt;(samples_.size());
-}</span>
+<span style = "background-color:#dfd">int SampleRepository::count() const { return static_cast&lt;int&gt;(items_.size()); }</span>
 
 <span style = "background-color:#dfd">int SampleRepository::totalStock() const {
-    return std::accumulate(samples_.begin(), samples_.end(), 0,
-        [](int sum, const Sample&amp; s) { return sum + s.stock; });
+    return std::accumulate(items_.begin(), items_.end(), 0,
+        [](int s, const Sample&amp; x){ return s + x.stock; });
 }</span>
 
-<span style = "background-color:#dfd">void SampleRepository::save(const Sample&amp; sample) {
-    auto it = std::find_if(samples_.begin(), samples_.end(),
-        [&amp;sample](const Sample&amp; s) { return s.id == sample.id; });
-    if (it != samples_.end())
-        throw std::runtime_error("ID already exists: " + sample.id);
-    samples_.push_back(sample);
+<span style = "background-color:#fdd">void SampleRepository::save(const Sample&amp; s) {
+    if (findById(s.id)) throw std::runtime_error("Duplicate ID: " + s.id);
+    items_.push_back(s);
     persist();
 }</span>
 
-<span style = "background-color:#dfd">bool SampleRepository::update(const Sample&amp; sample) {
-    auto it = std::find_if(samples_.begin(), samples_.end(),
-        [&amp;sample](const Sample&amp; s) { return s.id == sample.id; });
-    if (it == samples_.end()) return false;
-    *it = sample;
-    persist();
-    return true;
+<span style = "background-color:#fdd">bool SampleRepository::update(const Sample&amp; s) {
+    auto it = std::find_if(items_.begin(), items_.end(),
+        [&amp;s](const Sample&amp; x){ return x.id == s.id; });
+    if (it == items_.end()) return false;
+    *it = s; persist(); return true;
 }</span>
 
 <span style = "background-color:#dfd">void SampleRepository::load() {
     std::ifstream f(filePath_);
-    if (!f.is_open()) { samples_.clear(); return; }</span>
-    try {
-<span style = "background-color:#dfd">        nlohmann::json j;
-        f &gt;&gt; j;
-        samples_ = j.get&lt;std::vector&lt;Sample&gt;&gt;();
-    } catch (...) {
-        samples_.clear();
-    }
-}</span>
+    if (!f.is_open()) { items_.clear(); return; }
+    try { nlohmann::json j; f &gt;&gt; j; items_ = j.get&lt;std::vector&lt;Sample&gt;&gt;(); }</span>
+<span style = "background-color:#fdd">    catch (...) { items_.clear(); }</span>
+<span style = "background-color:#dfd">}</span>
 
-<span style = "background-color:#dfd">void SampleRepository::persist() const {
+<span style = "background-color:#fdd">void SampleRepository::persist() const {
     std::ofstream f(filePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + filePath_);
-    f &lt;&lt; nlohmann::json(samples_).dump(2);
+    f &lt;&lt; nlohmann::json(items_).dump(2);
 }</span></pre>
         <hr />
         <table width="100%">

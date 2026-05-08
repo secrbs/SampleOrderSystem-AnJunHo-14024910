@@ -83,12 +83,21 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <!-- 소스 파일 (Phase 진행에 따라 추가) -->
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="repository\SampleRepository.cpp" />
+    <ClCompile Include="repository\OrderRepository.cpp" />
+    <ClCompile Include="controller\MainController.cpp" />
+    <ClCompile Include="view\MainView.cpp" />
   </ItemGroup>
-  <!-- 헤더 파일 (Phase 진행에 따라 추가) -->
   <ItemGroup>
+    <ClInclude Include="model\Sample.h" />
+    <ClInclude Include="model\Order.h" />
+    <ClInclude Include="model\SystemStatus.h" />
+    <ClInclude Include="repository\SampleRepository.h" />
+    <ClInclude Include="repository\OrderRepository.h" />
+    <ClInclude Include="controller\MainController.h" />
+    <ClInclude Include="view\MainView.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

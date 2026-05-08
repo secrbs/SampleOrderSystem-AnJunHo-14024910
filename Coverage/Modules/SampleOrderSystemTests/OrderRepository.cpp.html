@@ -14,79 +14,51 @@
 #include &lt;algorithm&gt;
 #include &lt;stdexcept&gt;
 
-OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
-                                 const std::string&amp; queueFilePath)
-<span style = "background-color:#dfd">    : orderFilePath_(orderFilePath), queueFilePath_(queueFilePath) {
-    load();
-}</span>
+OrderRepository::OrderRepository(const std::string&amp; orderPath, const std::string&amp; queuePath)
+<span style = "background-color:#dfd">    : orderPath_(orderPath), queuePath_(queuePath) { load(); }</span>
 
-<span style = "background-color:#dfd">std::vector&lt;Order&gt; OrderRepository::findAll() const {
-    return orders_;
-}</span>
+<span style = "background-color:#fdd">std::vector&lt;Order&gt; OrderRepository::findAll() const { return orders_; }</span>
+<span style = "background-color:#dfd">int OrderRepository::count() const { return static_cast&lt;int&gt;(orders_.size()); }
+int OrderRepository::productionQueueCount() const { return static_cast&lt;int&gt;(queue_.size()); }</span>
+<span style = "background-color:#fdd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const { return queue_; }</span>
 
-<span style = "background-color:#dfd">int OrderRepository::count() const {
-    return static_cast&lt;int&gt;(orders_.size());
-}</span>
+<span style = "background-color:#fdd">void OrderRepository::save(const Order&amp; o) { orders_.push_back(o); persist(); }</span>
 
-<span style = "background-color:#dfd">int OrderRepository::productionQueueCount() const {
-    return static_cast&lt;int&gt;(queue_.size());
-}</span>
-
-<span style = "background-color:#dfd">void OrderRepository::save(const Order&amp; order) {
-    orders_.push_back(order);
-    persist();
-}</span>
-
-<span style = "background-color:#dfd">bool OrderRepository::update(const Order&amp; order) {
+<span style = "background-color:#fdd">bool OrderRepository::update(const Order&amp; o) {
     auto it = std::find_if(orders_.begin(), orders_.end(),
-        [&amp;order](const Order&amp; o) { return o.orderId == order.orderId; });
+        [&amp;o](const Order&amp; x){ return x.orderId == o.orderId; });
     if (it == orders_.end()) return false;
-    *it = order;
-    persist();
-    return true;
+    *it = o; persist(); return true;
+}</span>
+
+<span style = "background-color:#fdd">void OrderRepository::enqueueJob(const ProductionJob&amp; job) {
+    queue_.push_back(job); persistQueue();
+}</span>
+
+<span style = "background-color:#fdd">void OrderRepository::dequeueJob() {
+    if (!queue_.empty()) { queue_.erase(queue_.begin()); persistQueue(); }
 }</span>
 
 <span style = "background-color:#dfd">void OrderRepository::load() {
     auto loadFile = [](const std::string&amp; path, auto&amp; vec) {
         std::ifstream f(path);
-        if (!f.is_open()) { vec.clear(); return; }</span>
-        try {
-<span style = "background-color:#dfd">            nlohmann::json j;
-            f &gt;&gt; j;
-            vec = j.get&lt;std::decay_t&lt;decltype(vec)&gt;&gt;();
-        } catch (...) {
-            vec.clear();
-        }
-    };
-    loadFile(orderFilePath_, orders_);
-    loadFile(queueFilePath_, queue_);
+        if (!f.is_open()) { vec.clear(); return; }
+        try { nlohmann::json j; f &gt;&gt; j; vec = j.get&lt;std::decay_t&lt;decltype(vec)&gt;&gt;(); }</span>
+<span style = "background-color:#fdd">        catch (...) { vec.clear(); }</span>
+<span style = "background-color:#dfd">    };
+    loadFile(orderPath_, orders_);
+    loadFile(queuePath_, queue_);
 }</span>
 
-<span style = "background-color:#dfd">void OrderRepository::enqueueJob(const ProductionJob&amp; job) {
-    queue_.push_back(job);
-    persistQueue();
-}</span>
-
-<span style = "background-color:#dfd">void OrderRepository::dequeueJob() {
-    if (!queue_.empty()) {
-        queue_.erase(queue_.begin());
-        persistQueue();</span>
-    }
-<span style = "background-color:#dfd">}</span>
-
-<span style = "background-color:#dfd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const {
-    return queue_;
-}</span>
-
-<span style = "background-color:#dfd">void OrderRepository::persist() const {
-    std::ofstream f(orderFilePath_);
-    if (!f.is_open()) throw std::runtime_error("Cannot write: " + orderFilePath_);
+<span style = "background-color:#fdd">void OrderRepository::persist() const {
+    std::ofstream f(orderPath_);
+    if (!f.is_open()) throw std::runtime_error("Cannot write: " + orderPath_);
     f &lt;&lt; nlohmann::json(orders_).dump(2);
 }</span>
 
-<span style = "background-color:#dfd">void OrderRepository::persistQueue() const {
-    std::ofstream f(queueFilePath_);
-    if (!f.is_open()) throw std::runtime_error("Cannot write: " + queueFilePath_);
+<span style = "background-color:#fdd">void OrderRepository::persistQueue() const {
+    std::ofstream f(queuePath_);
+    if (!f.is_open()) throw std::runtime_error("Cannot write: " + queuePath_);
     f &lt;&lt; nlohmann::json(queue_).dump(2);
 }</span></pre>
         <hr />

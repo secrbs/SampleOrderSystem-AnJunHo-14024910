@@ -9,12 +9,11 @@
     <body onload="prettyPrint()">
         <h4></h4>
         <pre class="prettyprint lang-cpp linenums">
-ï»¿#include "MainController.h"
+#include "MainController.h"
 
 MainController::MainController(SampleRepository&amp; sampleRepo, OrderRepository&amp; orderRepo)
 <span style = "background-color:#dfd">    : sampleRepo_(sampleRepo), orderRepo_(orderRepo) {}</span>
 
-// choice == 0 ì´ë©´ false(ì¢ë£), ê·¸ ì¸ true(ê³ì)
 <span style = "background-color:#dfd">bool MainController::handleMenu(int choice) {
     return choice != 0;
 }</span>
