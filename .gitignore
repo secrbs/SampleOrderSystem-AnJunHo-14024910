@@ -1,0 +1,9 @@
+.vs/
+bin/
+obj/
+*.user
+*.exe
+*.pdb
+*.ilk
+data/*.json
+packages/
