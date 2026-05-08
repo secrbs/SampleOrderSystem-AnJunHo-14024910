@@ -40,6 +40,13 @@ OpenCppCoverage.exe
 
 결과 위치: `Coverage\index.html`
 
+### 4. 보고서 열기
+
+Coverage 측정 완료 후 브라우저로 자동 실행:
+```
+explorer C:\reviewer\SampleOrderSystem-AnJunHo-14024910\Coverage\index.html
+```
+
 ## 출력 형식
 
 ```
