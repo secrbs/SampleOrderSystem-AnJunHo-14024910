@@ -18,9 +18,9 @@
 SampleRepository::SampleRepository(const std::string&amp; filePath)
 <span style = "background-color:#dfd">    : filePath_(filePath) { load(); }</span>
 
-<span style = "background-color:#fdd">std::vector&lt;Sample&gt; SampleRepository::findAll() const { return items_; }</span>
+<span style = "background-color:#dfd">std::vector&lt;Sample&gt; SampleRepository::findAll() const { return items_; }</span>
 
-<span style = "background-color:#fdd">std::optional&lt;Sample&gt; SampleRepository::findById(const std::string&amp; id) const {
+<span style = "background-color:#dfd">std::optional&lt;Sample&gt; SampleRepository::findById(const std::string&amp; id) const {
     auto it = std::find_if(items_.begin(), items_.end(),
         [&amp;id](const Sample&amp; s){ return s.id == id; });
     return it == items_.end() ? std::nullopt : std::optional&lt;Sample&gt;(*it);
@@ -33,7 +33,7 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
         [](int s, const Sample&amp; x){ return s + x.stock; });
 }</span>
 
-<span style = "background-color:#fdd">void SampleRepository::save(const Sample&amp; s) {
+<span style = "background-color:#dfd">void SampleRepository::save(const Sample&amp; s) {
     if (findById(s.id)) throw std::runtime_error("Duplicate ID: " + s.id);
     items_.push_back(s);
     persist();
@@ -53,7 +53,7 @@ SampleRepository::SampleRepository(const std::string&amp; filePath)
 <span style = "background-color:#fdd">    catch (...) { items_.clear(); }</span>
 <span style = "background-color:#dfd">}</span>
 
-<span style = "background-color:#fdd">void SampleRepository::persist() const {
+<span style = "background-color:#dfd">void SampleRepository::persist() const {
     std::ofstream f(filePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + filePath_);
     f &lt;&lt; nlohmann::json(items_).dump(2);

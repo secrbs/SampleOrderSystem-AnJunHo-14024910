@@ -9,44 +9,47 @@
     <body onload="prettyPrint()">
         <h4></h4>
         <pre class="prettyprint lang-cpp linenums">
-ï»¿#include "SampleView.h"
+#include "SampleView.h"
 #include &lt;iostream&gt;
 #include &lt;iomanip&gt;
+#include &lt;conio.h&gt;
 
-<span style = "background-color:#fdd">void SampleView::showMenu() const {
-    std::cout &lt;&lt; "\n[ ìë£ ê´ë¦¬ ]\n";
-    std::cout &lt;&lt; "  [1] ìë£ ë±ë¡\n";
-    std::cout &lt;&lt; "  [2] ìë£ ëª©ë¡\n";
-    std::cout &lt;&lt; "  [3] ìë£ ê²ì\n";
-    std::cout &lt;&lt; "  [0] ë¤ë¡\n";
+static const int WIDTH = 62;
+
+<span style = "background-color:#fdd">void SampleView::showPath(const std::string&amp; path) const {
+    std::cout &lt;&lt; path &lt;&lt; "\n";
+    std::cout &lt;&lt; std::string(WIDTH + 2, '-') &lt;&lt; "\n";
+}</span>
+
+<span style = "background-color:#fdd">void SampleView::showMenu(const std::string&amp; path) const {
+    std::cout &lt;&lt; "\n";
+    showPath(path);
+    std::cout &lt;&lt; "[ ìë£ ê´ë¦¬ ]\n\n";
+    std::cout &lt;&lt; "  [1] ìë£ ë±ë¡    [2] ìë£ ëª©ë¡    [3] ìë£ ê²ì    [0] ë¤ë¡\n\n";
     std::cout &lt;&lt; "ì í &gt; ";
 }</span>
 
 <span style = "background-color:#fdd">int SampleView::getChoice() const {
-    int choice = -1;
-    std::cin &gt;&gt; choice;
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(1024, '\n');
-        return -1;</span>
-    }
-<span style = "background-color:#fdd">    return choice;
+    char ch = static_cast&lt;char&gt;(_getch());
+    std::cout &lt;&lt; ch &lt;&lt; "\n";
+    if (ch &gt;= '0' &amp;&amp; ch &lt;= '9') return ch - '0';
+    return -1;
 }</span>
 
 <span style = "background-color:#fdd">Sample SampleView::inputSample() const {
     Sample s;
-    std::cout &lt;&lt; "  ID             &gt; "; std::cin &gt;&gt; s.id;
-    std::cout &lt;&lt; "  ì´ë¦           &gt; ";
-    std::cin.ignore(); std::getline(std::cin, s.name);
-    std::cout &lt;&lt; "  íê·  ìì°ìê°  &gt; "; std::cin &gt;&gt; s.avgProductionTime;
-    std::cout &lt;&lt; "  ìì¨ (0~1)     &gt; "; std::cin &gt;&gt; s.yield;
+    std::cout &lt;&lt; "  ID            &gt; "; std::cin &gt;&gt; s.id;
+    std::cin.ignore(1024, '\n');
+    std::cout &lt;&lt; "  ì´ë¦          &gt; "; std::getline(std::cin, s.name);
+    std::cout &lt;&lt; "  íê·  ìì°ìê° &gt; "; std::cin &gt;&gt; s.avgProductionTime;
+    std::cout &lt;&lt; "  ìì¨ (0~1)    &gt; "; std::cin &gt;&gt; s.yield;
+    std::cin.ignore(1024, '\n');
     s.stock = 0;
     return s;
 }</span>
 
 <span style = "background-color:#fdd">std::string SampleView::inputSearchKeyword() const {
     std::cout &lt;&lt; "  ê²ìì´ &gt; ";
-    std::cin.ignore();
     std::string kw;
     std::getline(std::cin, kw);
     return kw;
@@ -57,30 +60,22 @@
         std::cout &lt;&lt; "  ë±ë¡ë ìë£ê° ììµëë¤.\n";
         return;</span>
     }
-<span style = "background-color:#fdd">    std::cout &lt;&lt; "\n  " &lt;&lt; std::left</span>
-              &lt;&lt; std::setw(8)  &lt;&lt; "ID"
+<span style = "background-color:#fdd">    std::cout &lt;&lt; "\n  "</span>
+              &lt;&lt; std::left &lt;&lt; std::setw(8)  &lt;&lt; "ID"
               &lt;&lt; std::setw(22) &lt;&lt; "ìë£ëª"
               &lt;&lt; std::setw(14) &lt;&lt; "ìì°ìê°"
               &lt;&lt; std::setw(8)  &lt;&lt; "ìì¨"
-              &lt;&lt; std::setw(8)  &lt;&lt; "ì¬ê³ "
-              &lt;&lt; "\n";
-<span style = "background-color:#fdd">    std::cout &lt;&lt; "  " &lt;&lt; std::string(60, '-') &lt;&lt; "\n";
-    for (const auto&amp; s : samples) {
-        std::cout &lt;&lt; "  " &lt;&lt; std::left</span>
-                  &lt;&lt; std::setw(8)  &lt;&lt; s.id
+              &lt;&lt; "ì¬ê³ \n";
+<span style = "background-color:#fdd">    std::cout &lt;&lt; "  " &lt;&lt; std::string(WIDTH, '-') &lt;&lt; "\n";
+    for (const auto&amp; s : samples)
+        std::cout &lt;&lt; "  "</span>
+                  &lt;&lt; std::left &lt;&lt; std::setw(8)  &lt;&lt; s.id
                   &lt;&lt; std::setw(22) &lt;&lt; s.name
                   &lt;&lt; std::setw(14) &lt;&lt; (std::to_string(s.avgProductionTime) + " min/ea")
                   &lt;&lt; std::setw(8)  &lt;&lt; s.yield
-                  &lt;&lt; std::setw(8)  &lt;&lt; s.stock
-                  &lt;&lt; "\n";
-<span style = "background-color:#fdd">    }
+<span style = "background-color:#fdd">                  &lt;&lt; s.stock &lt;&lt; " ea\n";
     std::cout &lt;&lt; "  ì´ " &lt;&lt; samples.size() &lt;&lt; "ì¢\n";
 }</span>
-
-<span style = "background-color:#fdd">void SampleView::showSample(const Sample&amp; s) const {
-    std::cout &lt;&lt; "  ID: " &lt;&lt; s.id &lt;&lt; "  ì´ë¦: " &lt;&lt; s.name</span>
-              &lt;&lt; "  ìì¨: " &lt;&lt; s.yield &lt;&lt; "  ì¬ê³ : " &lt;&lt; s.stock &lt;&lt; "\n";
-<span style = "background-color:#fdd">}</span>
 
 <span style = "background-color:#fdd">void SampleView::showMessage(const std::string&amp; msg) const {
     std::cout &lt;&lt; "  " &lt;&lt; msg &lt;&lt; "\n";

@@ -76,7 +76,7 @@ static const int WIDTH = 62;
 <span style = "background-color:#fdd">    updateClock();</span>
 
     // ì»¤ìë¥¼ ìë ¥ íë¡¬íí¸ ìì¹ë¡ ë³µê·
-<span style = "background-color:#fdd">    moveCursor(7, 9);   // "ì í &gt; " ë¤ì
+<span style = "background-color:#fdd">    moveCursor(INPUT_COL, INPUT_ROW);
 }</span>
 
 <span style = "background-color:#fdd">int MainView::getChoice() const {</span>
@@ -92,12 +92,12 @@ static const int WIDTH = 62;
 <span style = "background-color:#fdd">            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
         updateClock();
-        moveCursor(7, 9);
+        moveCursor(INPUT_COL, INPUT_ROW);
     }
 }</span>
 
 <span style = "background-color:#fdd">void MainView::showInvalidInput() const {
-    moveCursor(0, 10);
+    moveCursor(0, INPUT_ROW + 1);
     std::cout &lt;&lt; "  ì¬ë°ë¥¸ ë©ë´ ë²í¸ë¥¼ ìë ¥íì¸ì (0~8).\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }</span></pre>
