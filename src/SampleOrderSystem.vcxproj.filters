@@ -79,6 +79,12 @@
     <ClCompile Include="view\ShipmentView.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>
+    <ClCompile Include="view\ApprovalView.cpp">
+      <Filter>Source Files\view</Filter>
+    </ClCompile>
+    <ClCompile Include="view\ProductionView.cpp">
+      <Filter>Source Files\view</Filter>
+    </ClCompile>
   </ItemGroup>
 
   <ItemGroup>
@@ -131,6 +137,12 @@
       <Filter>Header Files\view</Filter>
     </ClInclude>
     <ClInclude Include="view\ShipmentView.h">
+      <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\ApprovalView.h">
+      <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\ProductionView.h">
       <Filter>Header Files\view</Filter>
     </ClInclude>
   </ItemGroup>

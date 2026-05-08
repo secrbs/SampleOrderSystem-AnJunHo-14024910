@@ -99,6 +99,8 @@
     <ClCompile Include="view\MonitorView.cpp" />
     <ClCompile Include="controller\ShipmentController.cpp" />
     <ClCompile Include="view\ShipmentView.cpp" />
+    <ClCompile Include="view\ApprovalView.cpp" />
+    <ClCompile Include="view\ProductionView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Sample.h" />
@@ -118,6 +120,8 @@
     <ClInclude Include="view\OrderView.h" />
     <ClInclude Include="view\MonitorView.h" />
     <ClInclude Include="view\ShipmentView.h" />
+    <ClInclude Include="view\ApprovalView.h" />
+    <ClInclude Include="view\ProductionView.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
