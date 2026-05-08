@@ -10,11 +10,13 @@
 #include "controller/OrderController.h"
 #include "controller/ApprovalController.h"
 #include "controller/MonitoringController.h"
+#include "controller/ProductionController.h"
 #include "view/MainView.h"
 #include "view/SampleView.h"
 #include "view/OrderView.h"
 #include "view/ApprovalView.h"
 #include "view/MonitorView.h"
+#include "view/ProductionView.h"
 
 // 메뉴 번호 → 이름 매핑 (경로 표시용)
 static const std::map<int, std::string> MAIN_MENU_NAMES = {
@@ -184,6 +186,9 @@ int main() {
         }
         if (!mainCtrl.handleMenu(choice)) break;
 
+        // 생산 자동 완료 체크
+        { ProductionController pc(sampleRepo, orderRepo); while (pc.checkAndAutoComplete()) {} }
+
         std::string path = buildPath("선택", choice, MAIN_MENU_NAMES);
 
         switch (choice) {
@@ -196,8 +201,14 @@ int main() {
                 mv.showMonitoring(path, mc.getOrderSummary(), mc.getStockInfo());
                 break;
             }
-            // Phase 6~8: 이후 연결
-            case 5: case 6: case 7: case 8:
+            case 5: {
+                ProductionController pc(sampleRepo, orderRepo);
+                ProductionView pv;
+                pv.showStatus(path, pc.getCurrentJob(), pc.getQueue(), pc.getElapsedMinutes());
+                break;
+            }
+            // Phase 7~8: 이후 연결
+            case 6: case 7: case 8:
                 // 미구현 메뉴 — 메인으로 돌아감 (별도 메시지 없음)
                 break;
             default:

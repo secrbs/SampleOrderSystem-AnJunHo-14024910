@@ -12,6 +12,7 @@
 #include "ProductionController.h"
 #include &lt;algorithm&gt;
 #include &lt;cmath&gt;
+#include &lt;cstdio&gt;
 #include &lt;chrono&gt;
 #include &lt;ctime&gt;
 
@@ -37,6 +38,22 @@ ProductionController::ProductionController(SampleRepository&amp; sampleRepo,
     return queue.front();
 }</span>
 
+<span style = "background-color:#fdd">double ProductionController::getElapsedMinutes() const {
+    auto job = getCurrentJob();
+    if (!job.has_value() || job-&gt;enqueuedAt.empty()) return 0.0;
+    time_t start = parseTimestamp(job-&gt;enqueuedAt);
+    if (start == -1) return 0.0;
+    return difftime(time(nullptr), start) / 60.0;
+}</span>
+
+<span style = "background-color:#fdd">bool ProductionController::checkAndAutoComplete() {
+    auto job = getCurrentJob();
+    if (!job.has_value() || job-&gt;enqueuedAt.empty()) return false;
+    if (getElapsedMinutes() &gt;= job-&gt;totalTime)
+        return completeCurrentJob();
+    return false;
+}</span>
+
 <span style = "background-color:#dfd">bool ProductionController::completeCurrentJob() {
     auto queue = orderRepo_.getQueue();
     if (queue.empty()) return false;</span>
@@ -53,16 +70,27 @@ ProductionController::ProductionController(SampleRepository&amp; sampleRepo,
     // ì£¼ë¬¸ ìí CONFIRMED
 <span style = "background-color:#dfd">    auto orders = orderRepo_.findAll();
     auto it = std::find_if(orders.begin(), orders.end(),
-        [&amp;job](const Order&amp; o) { return o.orderId == job.orderId; });
+        [&amp;job](const Order&amp; o){ return o.orderId == job.orderId; });
     if (it != orders.end()) {
         it-&gt;status    = OrderStatus::CONFIRMED;
         it-&gt;updatedAt = currentTimestamp();
         orderRepo_.update(*it);</span>
     }
 
-    // íìì ì ê±° (front dequeue)
 <span style = "background-color:#dfd">    orderRepo_.dequeueJob();
     return true;
+}</span>
+
+<span style = "background-color:#fdd">time_t ProductionController::parseTimestamp(const std::string&amp; ts) const {
+    std::tm tm = {};</span>
+    if (sscanf_s(ts.c_str(), "%d-%d-%dT%d:%d:%d",
+                 &amp;tm.tm_year, &amp;tm.tm_mon, &amp;tm.tm_mday,
+<span style = "background-color:#fdd">                 &amp;tm.tm_hour, &amp;tm.tm_min, &amp;tm.tm_sec) != 6)
+        return -1;
+    tm.tm_year -= 1900;
+    tm.tm_mon  -= 1;
+    tm.tm_isdst = -1;
+    return mktime(&amp;tm);
 }</span>
 
 <span style = "background-color:#dfd">std::string ProductionController::currentTimestamp() const {
@@ -70,7 +98,7 @@ ProductionController::ProductionController(SampleRepository&amp; sampleRepo,
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
     localtime_s(&amp;tm, &amp;t);</span>
-    char buf[32];
+    char buf[20];
 <span style = "background-color:#dfd">    std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", &amp;tm);
     return buf;
 }</span></pre>

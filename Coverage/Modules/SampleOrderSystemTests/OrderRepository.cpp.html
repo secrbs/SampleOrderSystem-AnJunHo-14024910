@@ -19,8 +19,8 @@ OrderRepository::OrderRepository(const std::string&amp; orderPath, const std::st
 
 <span style = "background-color:#dfd">std::vector&lt;Order&gt; OrderRepository::findAll() const { return orders_; }
 int OrderRepository::count() const { return static_cast&lt;int&gt;(orders_.size()); }
-int OrderRepository::productionQueueCount() const { return static_cast&lt;int&gt;(queue_.size()); }</span>
-<span style = "background-color:#fdd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const { return queue_; }</span>
+int OrderRepository::productionQueueCount() const { return static_cast&lt;int&gt;(queue_.size()); }
+std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const { return queue_; }</span>
 
 <span style = "background-color:#dfd">void OrderRepository::save(const Order&amp; o) { orders_.push_back(o); persist(); }</span>
 
@@ -35,7 +35,7 @@ int OrderRepository::productionQueueCount() const { return static_cast&lt;int&gt
     queue_.push_back(job); persistQueue();
 }</span>
 
-<span style = "background-color:#fdd">void OrderRepository::dequeueJob() {
+<span style = "background-color:#dfd">void OrderRepository::dequeueJob() {
     if (!queue_.empty()) { queue_.erase(queue_.begin()); persistQueue(); }
 }</span>
 
