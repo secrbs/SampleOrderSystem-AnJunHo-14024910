@@ -92,6 +92,8 @@ PR 생성 시 아래 내용을 PR description에 포함한다.
 
 ## 빌드 & 테스트
 
+> E2E 테스트 환경 설정: `doc/e2e.md`
+
 ```
 # 1. NuGet 패키지 복원 (최초 1회 또는 packages/ 없을 때)
 nuget.exe restore SampleOrderSystem.sln -PackagesDirectory packages
