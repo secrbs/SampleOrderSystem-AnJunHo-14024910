@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>MainView.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+    <body onload="prettyPrint()">
+        <h4></h4>
+        <pre class="prettyprint lang-cpp linenums">
+#include "MainView.h"
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;sstream&gt;
+#include &lt;chrono&gt;
+#include &lt;ctime&gt;
+#include &lt;thread&gt;
+#include &lt;conio.h&gt;
+#include &lt;Windows.h&gt;
+
+static const int WIDTH = 62;
+
+<span style = "background-color:#fdd">void MainView::moveCursor(int x, int y) const {
+    COORD pos{ static_cast&lt;SHORT&gt;(x), static_cast&lt;SHORT&gt;(y) };
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}</span>
+
+<span style = "background-color:#fdd">std::string MainView::currentTime() const {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm tm{};
+    localtime_s(&amp;tm, &amp;t);</span>
+    char buf[20];
+<span style = "background-color:#fdd">    std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &amp;tm);
+    return buf;
+}</span>
+
+<span style = "background-color:#fdd">void MainView::updateClock() const {
+    moveCursor(CLOCK_COL, CLOCK_ROW);
+    std::cout &lt;&lt; currentTime() &lt;&lt; std::flush;
+}</span>
+
+<span style = "background-color:#fdd">void MainView::drawScreen(const SystemStatus&amp; status) const {</span>
+    // íë©´ ì§ì°ê¸°
+<span style = "background-color:#fdd">    system("cls");</span>
+
+<span style = "background-color:#fdd">    auto line  = [](char c) { std::cout &lt;&lt; "  " &lt;&lt; std::string(WIDTH, c) &lt;&lt; "\n"; };
+    auto dline = [&amp;]()      { line('='); };
+    auto sline = [&amp;]()      { line('-'); };</span>
+
+    // í¤ë
+<span style = "background-color:#fdd">    dline();
+    std::cout &lt;&lt; "  ë°ëì²´ ìë£ ìì°ì£¼ë¬¸ê´ë¦¬ ìì¤í"</span>
+              &lt;&lt; std::setw(WIDTH - 30) &lt;&lt; "" &lt;&lt; "\n";
+<span style = "background-color:#fdd">    dline();</span>
+
+    // ìì¤í íí©
+<span style = "background-color:#fdd">    std::cout &lt;&lt; "  ë±ë¡ ìë£  " &lt;&lt; std::setw(4) &lt;&lt; status.sampleCount &lt;&lt; " ì¢"</span>
+              &lt;&lt; "  â  ì´ ì¬ê³    " &lt;&lt; std::setw(6) &lt;&lt; status.totalStock &lt;&lt; " ea\n";
+<span style = "background-color:#fdd">    std::cout &lt;&lt; "  ì ì²´ ì£¼ë¬¸  " &lt;&lt; std::setw(4) &lt;&lt; status.orderCount  &lt;&lt; " ê±´"</span>
+              &lt;&lt; "  â  ìì° ëê¸° " &lt;&lt; std::setw(6) &lt;&lt; status.productionQueueCount &lt;&lt; " ê±´\n";
+<span style = "background-color:#fdd">    sline();</span>
+
+    // ë©ë´
+<span style = "background-color:#fdd">    std::cout &lt;&lt; "  [1] ìë£ ê´ë¦¬          [2] ìë£ ì£¼ë¬¸\n";
+    std::cout &lt;&lt; "  [3] ì£¼ë¬¸ ì¹ì¸/ê±°ì      [4] ëª¨ëí°ë§\n";
+    std::cout &lt;&lt; "  [5] ìì°ë¼ì¸ ì¡°í      [6] ì¶ê³  ì²ë¦¬\n";
+    std::cout &lt;&lt; "  [0] ì¢ë£\n";
+    sline();</span>
+
+    // ìë ¥ íë¡¬íí¸
+<span style = "background-color:#fdd">    std::cout &lt;&lt; "ì í &gt; " &lt;&lt; std::flush;</span>
+
+    // ìê°ì í¤ë ì°ì¸¡ì ë®ì´ì°ê¸°
+<span style = "background-color:#fdd">    updateClock();</span>
+
+    // ì»¤ìë¥¼ ìë ¥ íë¡¬íí¸ ìì¹ë¡ ë³µê·
+<span style = "background-color:#fdd">    moveCursor(INPUT_COL, INPUT_ROW);
+}</span>
+
+<span style = "background-color:#fdd">int MainView::getChoice() const {</span>
+    // _kbhit() ë£¨í: 1ì´ë§ë¤ ìê° ê°±ì , ìë ¥ ì¤ë©´ ì¦ì ì²ë¦¬
+<span style = "background-color:#fdd">    while (true) {
+        for (int i = 0; i &lt; 10; ++i) {    // 100ms Ã 10 = 1ì´
+            if (_kbhit()) {
+                char ch = static_cast&lt;char&gt;(_getch());
+                std::cout &lt;&lt; ch &lt;&lt; "\n";
+                if (ch &gt;= '0' &amp;&amp; ch &lt;= '9') return ch - '0';
+                if (ch == '\r' || ch == '\n') return -2;  // ë¹ì¹¸ = ì¢ë£ íì¸
+                return -1;</span>
+            }
+<span style = "background-color:#fdd">            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        updateClock();
+        moveCursor(INPUT_COL, INPUT_ROW);
+    }
+}</span>
+
+<span style = "background-color:#fdd">void MainView::showInvalidInput() const {
+    moveCursor(0, INPUT_ROW + 1);
+    std::cout &lt;&lt; "  ì¬ë°ë¥¸ ë©ë´ ë²í¸ë¥¼ ìë ¥íì¸ì (0~6).\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+}</span>
+
+<span style = "background-color:#fdd">bool MainView::confirmExit() const {
+    moveCursor(0, INPUT_ROW + 1);
+    std::cout &lt;&lt; "  ì¢ë£íìê² ìµëê¹? [Y/N] &gt; ";
+    char ch = static_cast&lt;char&gt;(_getch());
+    std::cout &lt;&lt; ch &lt;&lt; "\n";
+    return (ch == 'Y' || ch == 'y');
+}</span></pre>
+        <hr />
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th align="center">
+                        <small>Generated by</small>
+                        <a href="https://github.com/OpenCppCoverage/OpenCppCoverage/releases">
+                            <strong>OpenCppCoverage (Version: 0.9.9.0)</strong>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </body>
+</html>

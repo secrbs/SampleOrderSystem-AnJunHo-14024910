@@ -73,12 +73,15 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <!-- src/ 포함 경로: 비즈니스 로직 헤더 참조용 -->
-      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)include;$(SolutionDir)packages\Microsoft.googletest.v140.windesktop.msvcstl.dyn.rt-dyn.1.8.1.3\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)packages\Microsoft.googletest.v140.windesktop.msvcstl.dyn.rt-dyn.1.8.1.3\lib\native\v140\windesktop\msvcstl\dyn\rt-dyn\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtestd.lib;gtest_maind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -90,7 +93,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)include;$(SolutionDir)packages\Microsoft.googletest.v140.windesktop.msvcstl.dyn.rt-dyn.1.8.1.3\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -101,13 +104,28 @@
     </Link>
   </ItemDefinitionGroup>
 
-  <!-- 테스트 파일 목록 (Phase 진행에 따라 추가) -->
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="Phase1Test.cpp" />
+    <ClCompile Include="Phase2Test.cpp" />
+    <ClCompile Include="Phase3Test.cpp" />
+    <ClCompile Include="Phase4Test.cpp" />
+    <ClCompile Include="Phase5Test.cpp" />
+    <ClCompile Include="Phase6Test.cpp" />
+    <ClCompile Include="Phase7Test.cpp" />
   </ItemGroup>
-
-  <!-- src/ 비즈니스 로직 소스 파일 (Phase 진행에 따라 추가, main.cpp 제외) -->
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)src\repository\SampleRepository.cpp" />
+    <ClCompile Include="$(SolutionDir)src\repository\OrderRepository.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\MainController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\SampleController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\OrderController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\ApprovalController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\MonitoringController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\ProductionController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\ShipmentController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\view\MainView.cpp" />
+    <ClCompile Include="$(SolutionDir)src\view\SampleView.cpp" />
   </ItemGroup>
 
   <!-- NuGet 참조 -->

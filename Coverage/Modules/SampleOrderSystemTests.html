@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8"/>
+        <title>SampleOrderSystemTests.exe</title>
+        <link rel="stylesheet" type="text/css" href="../third-party/css/style.css"/>
+        <script src="../third-party/RGraph/libraries/RGraph.common.core.js" type="text/javascript"></script>
+        <script src="../third-party/RGraph/libraries/RGraph.common.dynamic.js" type="text/javascript"></script>
+        <script src="../third-party/RGraph/libraries/RGraph.common.tooltips.js" type="text/javascript"></script>
+        <script src="../third-party/RGraph/libraries/RGraph.pie.js" type="text/javascript"></script>
+        <script src="../third-party/JQuery/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            
+            new RGraph.Pie('pi_26af5700-e644-4629-ac3e-056b34fa0975', [331, 220])
+                .set('labels', ['Cover 60%','Uncover 40%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 331 lines (60%)', 'uncover 220 lines (40%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_79912e08-3fe7-43b8-8f35-c4c9def69935', [0, 63])
+                .set('labels', ['Cover 0%','Uncover 100%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 0 lines (0%)', 'uncover 63 lines (100%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_3fda76f2-9d1a-4a14-9599-b6336c5a7492', [0, 132])
+                .set('labels', ['Cover 0%','Uncover 100%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 0 lines (0%)', 'uncover 132 lines (100%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_f5c7933b-0097-4019-be5b-dcbd6b031bcf', [42, 23])
+                .set('labels', ['Cover 64%','Uncover 36%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 42 lines (64%)', 'uncover 23 lines (36%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_c66d639e-9b70-4b28-bc12-7ce26f5dffe9', [37, 1])
+                .set('labels', ['Cover 97%','Uncover 3%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 37 lines (97%)', 'uncover 1 lines (3%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_d8ce84cf-bca3-45eb-904a-5dc2a9344ef9', [33, 1])
+                .set('labels', ['Cover 97%','Uncover 3%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 33 lines (97%)', 'uncover 1 lines (3%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_dd552508-de1d-4b51-bccb-ae3b1317726e', [52, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 52 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_dfaefbd1-4ee5-4aec-821f-0e25c3f4fea9', [7, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 7 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_4ca9335a-750f-4398-b60b-86c27f22a4de', [26, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 26 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_66cbfd68-3663-4324-b6db-00f9e6ce18f9', [36, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 36 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_700e2ee9-2564-4a7c-80f1-e6cc8b15e071', [30, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 30 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_18ebdcf4-47e8-4e20-bb74-86a9d1cc23aa', [33, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 33 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_19e5a89a-2fa5-4712-b7d6-4e6cee7051d2', [25, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 25 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+            new RGraph.Pie('pi_6772499b-845f-4eb8-bc06-1f4d67571941', [10, 0])
+                .set('labels', ['Cover 100%','Uncover 0%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 10 lines (100%)', 'uncover 0 lines (0%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+
+      })
+    </script>    
+        <h1>
+        SampleOrderSystemTests.exe
+        </h1>
+        <h4>
+        
+        </h4>
+        <table id="rounded-corner">
+            <thead>
+                <tr>
+                    <th scope="col" class="rounded-left">Coverage</th>
+                    <th scope="col">Total lines</th>
+                    <th scope="col" class="rounded-right">Items</th>
+                </tr>
+            </thead> 
+            <tbody>
+                
+                <tr>
+                    <td>
+            <canvas id="pi_26af5700-e644-4629-ac3e-056b34fa0975" width="280" height="100">Cover 60%</canvas>
+                    </td>            
+                    <td>551</td>
+                    <td>            
+                      
+                      C:\reviewer\SampleOrderSystem-AnJunHo-14024910\bin\Debug\SampleOrderSystemTests.exe
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_79912e08-3fe7-43b8-8f35-c4c9def69935" width="280" height="100">Cover 0%</canvas>
+                    </td>            
+                    <td>63</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/MainView.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\view\MainView.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_3fda76f2-9d1a-4a14-9599-b6336c5a7492" width="280" height="100">Cover 0%</canvas>
+                    </td>            
+                    <td>132</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/SampleView.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\view\SampleView.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_f5c7933b-0097-4019-be5b-dcbd6b031bcf" width="280" height="100">Cover 64%</canvas>
+                    </td>            
+                    <td>65</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/ProductionController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\ProductionController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_c66d639e-9b70-4b28-bc12-7ce26f5dffe9" width="280" height="100">Cover 97%</canvas>
+                    </td>            
+                    <td>38</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/OrderRepository.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\repository\OrderRepository.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_d8ce84cf-bca3-45eb-904a-5dc2a9344ef9" width="280" height="100">Cover 97%</canvas>
+                    </td>            
+                    <td>34</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/SampleRepository.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\repository\SampleRepository.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_dd552508-de1d-4b51-bccb-ae3b1317726e" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>52</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/ApprovalController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\ApprovalController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_dfaefbd1-4ee5-4aec-821f-0e25c3f4fea9" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>7</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/MainController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\MainController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_4ca9335a-750f-4398-b60b-86c27f22a4de" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>26</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/MonitoringController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\MonitoringController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_66cbfd68-3663-4324-b6db-00f9e6ce18f9" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>36</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/OrderController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\OrderController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_700e2ee9-2564-4a7c-80f1-e6cc8b15e071" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>30</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/SampleController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\SampleController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_18ebdcf4-47e8-4e20-bb74-86a9d1cc23aa" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>33</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/ShipmentController.cpp.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\controller\ShipmentController.cpp</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_19e5a89a-2fa5-4712-b7d6-4e6cee7051d2" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>25</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/Order.h.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\model\Order.h</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+                <tr>
+                    <td>
+            <canvas id="pi_6772499b-845f-4eb8-bc06-1f4d67571941" width="280" height="100">Cover 100%</canvas>
+                    </td>            
+                    <td>10</td>
+                    <td>            
+                       <a href="SampleOrderSystemTests/Sample.h.html">C:\reviewer\SampleOrderSystem-AnJunHo-14024910\src\model\Sample.h</a> 
+                      
+                      
+                    </td>
+                </tr>        
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                <td colspan="2" class="rounded-foot-left"></td>
+                <td class="rounded-foot-right"></td>
+                </tr>
+            </tfoot>            
+        </table>
+        <hr/>
+        <table width="100%" >
+         <thead>
+            <tr>
+               <th align="center">
+                  <small>Generated by</small>
+                  <a href="https://github.com/OpenCppCoverage/OpenCppCoverage/releases">
+                     <strong>OpenCppCoverage (Version: 0.9.9.0)</strong>
+                  </a>
+               </th>
+            </tr>
+         </thead>
+        </table>
+    </body>
+</html>

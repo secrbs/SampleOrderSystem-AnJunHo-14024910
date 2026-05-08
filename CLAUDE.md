@@ -15,16 +15,21 @@
 각 Phase는 아래 순서를 반드시 따른다.
 
 ```
-1. Red          테스트 먼저 작성 (실패 확인 필수)
+1. Red              테스트 먼저 작성 (실패 확인 필수)
       ↓
-2. Green        테스트를 통과하는 최소 구현
+2. Green            테스트를 통과하는 최소 구현
       ↓
-3. Verify       verify-all Agent 실행 → 통합 보고서 확인
+3. Verify           verify-all Agent 실행 → 통합 보고서 확인
       ↓
-4. 검토 요청    보고서와 함께 사람에게 검토 요청
+4. 수동 E2E 테스트  사용자가 직접 앱을 실행하여 동작 확인
       ↓
-5. 커밋 & 반복  검토 통과 후 커밋, 다음 Phase로
+5. 커밋             사용자가 "커밋해" 라고 하면 커밋
+      ↓
+6. 다음 Phase 반복
 ```
+
+> 4단계에서 사용자가 직접 실행할 수 있도록 메인 앱 빌드 완료 상태를 유지한다.  
+> **커밋은 사용자가 명시적으로 요청할 때만 한다.**
 
 ### Verify Harness (3단계)
 
@@ -92,14 +97,44 @@ PR 생성 시 아래 내용을 PR description에 포함한다.
 
 ## 빌드 & 테스트
 
+> E2E 테스트 환경 설정: `doc/e2e.md`
+
 ```
-# Visual Studio 2022에서 SampleOrderSystem.sln 열기 → 빌드
-# 테스트 실행
+# 1. NuGet 패키지 복원 (최초 1회 또는 packages/ 없을 때)
+nuget.exe restore SampleOrderSystem.sln -PackagesDirectory packages
+
+# 2. 빌드 (Visual Studio 2022에서 SampleOrderSystem.sln 열기 → 빌드)
+# MSBuild 경로: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe
+
+# 3. 테스트 실행
 bin\Debug\SampleOrderSystemTests.exe
 
-# 커버리지 측정 (결과는 .\Coverage\index.html 에서 확인)
+# 4. 커버리지 측정 (결과: Coverage\index.html)
 OpenCppCoverage.exe --sources src --export_type=html:Coverage -- bin\Debug\SampleOrderSystemTests.exe
 ```
+
+---
+
+## UI 규칙
+
+### 내비게이션 경로 표시 (Breadcrumb)
+
+메인 메뉴 이외의 모든 서브 뷰는 상단에 사용자가 어떤 입력을 거쳐 현재 화면에 도달했는지 표시한다.
+
+```
+선택 > 2
+──────────────────────────────────────
+[ 시료 관리 ]
+
+  [1] 시료 등록  ...
+
+선택 > 2 > 1
+──────────────────────────────────────
+[ 시료 등록 ]
+```
+
+- 메인 화면에서 누른 키부터 현재까지의 입력 흐름을 순서대로 표시
+- 사용자가 현재 어느 메뉴 depth에 있는지 한눈에 파악 가능해야 함
 
 ---
 
@@ -141,10 +176,10 @@ OpenCppCoverage.exe --sources src --export_type=html:Coverage -- bin\Debug\Sampl
 
 | Phase | 명칭 | 상태 |
 |-------|------|------|
-| Phase 1 | 메인 UI | 미시작 |
-| Phase 2 | 시료 관리 | 미시작 |
-| Phase 3 | 주문 접수 | 미시작 |
-| Phase 4 | 주문 승인/거절 | 미시작 |
-| Phase 5 | 생산라인 | 미시작 |
-| Phase 6 | 모니터링 | 미시작 |
+| Phase 1 | 메인 UI | 완료 |
+| Phase 2 | 시료 관리 | 완료 |
+| Phase 3 | 주문 접수 | 완료 |
+| Phase 4 | 주문 승인/거절 | 완료 |
+| Phase 5 | 모니터링 | 완료 |
+| Phase 6 | 생산라인 | 완료 |
 | Phase 7 | 출고 처리 | 미시작 |
