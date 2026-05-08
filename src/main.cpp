@@ -10,10 +10,11 @@ int main() {
     MainView         view;
 
     while (true) {
-        auto status = controller.getSystemStatus();
-        view.showMenu(status);
+        view.showMenu(controller.getSystemStatus());
         int choice = view.getChoice();
         if (!controller.handleMenu(choice)) break;
+        if (choice >= 1 && choice <= 6) view.showStub(choice);
+        else view.showInvalidInput();
     }
     return 0;
 }

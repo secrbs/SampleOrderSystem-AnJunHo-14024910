@@ -1,21 +1,11 @@
 #include "MainController.h"
-#include "../view/MainView.h"
 
 MainController::MainController(SampleRepository& sampleRepo, OrderRepository& orderRepo)
     : sampleRepo_(sampleRepo), orderRepo_(orderRepo) {}
 
+// choice == 0 이면 false(종료), 그 외 true(계속)
 bool MainController::handleMenu(int choice) {
-    MainView view;
-    switch (choice) {
-        case 0: return false;
-        case 1: case 2: case 3:
-        case 4: case 5: case 6:
-            view.showStub(choice);
-            return true;
-        default:
-            view.showInvalidInput();
-            return true;
-    }
+    return choice != 0;
 }
 
 SystemStatus MainController::getSystemStatus() const {
