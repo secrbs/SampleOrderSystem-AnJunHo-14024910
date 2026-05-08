@@ -37,7 +37,7 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     persist();
 }</span>
 
-<span style = "background-color:#fdd">bool OrderRepository::update(const Order&amp; order) {
+<span style = "background-color:#dfd">bool OrderRepository::update(const Order&amp; order) {
     auto it = std::find_if(orders_.begin(), orders_.end(),
         [&amp;order](const Order&amp; o) { return o.orderId == order.orderId; });
     if (it == orders_.end()) return false;
@@ -62,10 +62,25 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     loadFile(queueFilePath_, queue_);
 }</span>
 
+<span style = "background-color:#dfd">void OrderRepository::enqueueJob(const ProductionJob&amp; job) {
+    queue_.push_back(job);
+    persistQueue();
+}</span>
+
+<span style = "background-color:#fdd">std::vector&lt;ProductionJob&gt; OrderRepository::getQueue() const {
+    return queue_;
+}</span>
+
 <span style = "background-color:#dfd">void OrderRepository::persist() const {
     std::ofstream f(orderFilePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + orderFilePath_);
     f &lt;&lt; nlohmann::json(orders_).dump(2);
+}</span>
+
+<span style = "background-color:#dfd">void OrderRepository::persistQueue() const {
+    std::ofstream f(queueFilePath_);
+    if (!f.is_open()) throw std::runtime_error("Cannot write: " + queueFilePath_);
+    f &lt;&lt; nlohmann::json(queue_).dump(2);
 }</span></pre>
         <hr />
         <table width="100%">

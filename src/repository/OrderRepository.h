@@ -15,6 +15,9 @@ public:
     void save(const Order& order);
     bool update(const Order& order);
 
+    void enqueueJob(const ProductionJob& job);
+    std::vector<ProductionJob> getQueue() const;
+
 private:
     std::string orderFilePath_;
     std::string queueFilePath_;
@@ -23,4 +26,5 @@ private:
 
     void load();
     void persist() const;
+    void persistQueue() const;
 };

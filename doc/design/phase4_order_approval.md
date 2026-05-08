@@ -1,4 +1,4 @@
-# Phase 3: 주문 승인/거절
+# Phase 4: 주문 승인/거절
 
 ## 목표
 
@@ -29,12 +29,12 @@ RESERVED ──[reject]──────────────→ REJECTED
 
 | ID | 내용 | 예상 결과 |
 |----|------|-----------|
-| T3-01 | 재고 충분할 때 승인 | CONFIRMED, 재고 차감 |
-| T3-02 | 재고 부족할 때 승인 | PRODUCING, 생산라인 큐 등록 |
-| T3-03 | 재고 정확히 일치할 때 승인 | CONFIRMED (충분 조건) |
-| T3-04 | 주문 거절 | REJECTED |
-| T3-05 | CONFIRMED 주문 재승인 시도 | 오류, 상태 변경 없음 |
-| T3-06 | RESERVED 목록 조회 | RESERVED 상태 주문만 반환 |
+| T4-01 | 재고 충분할 때 승인 | CONFIRMED, 재고 차감 |
+| T4-02 | 재고 부족할 때 승인 | PRODUCING, 생산라인 큐 등록 |
+| T4-03 | 재고 정확히 일치할 때 승인 | CONFIRMED (충분 조건) |
+| T4-04 | 주문 거절 | REJECTED |
+| T4-05 | CONFIRMED 주문 재승인 시도 | 오류, 상태 변경 없음 |
+| T4-06 | RESERVED 목록 조회 | RESERVED 상태 주문만 반환 |
 
 ## 완료 기준
 

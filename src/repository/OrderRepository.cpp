@@ -51,8 +51,23 @@ void OrderRepository::load() {
     loadFile(queueFilePath_, queue_);
 }
 
+void OrderRepository::enqueueJob(const ProductionJob& job) {
+    queue_.push_back(job);
+    persistQueue();
+}
+
+std::vector<ProductionJob> OrderRepository::getQueue() const {
+    return queue_;
+}
+
 void OrderRepository::persist() const {
     std::ofstream f(orderFilePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + orderFilePath_);
     f << nlohmann::json(orders_).dump(2);
+}
+
+void OrderRepository::persistQueue() const {
+    std::ofstream f(queueFilePath_);
+    if (!f.is_open()) throw std::runtime_error("Cannot write: " + queueFilePath_);
+    f << nlohmann::json(queue_).dump(2);
 }
