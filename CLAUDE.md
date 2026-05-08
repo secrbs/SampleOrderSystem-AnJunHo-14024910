@@ -93,11 +93,16 @@ PR 생성 시 아래 내용을 PR description에 포함한다.
 ## 빌드 & 테스트
 
 ```
-# Visual Studio 2022에서 SampleOrderSystem.sln 열기 → 빌드
-# 테스트 실행
+# 1. NuGet 패키지 복원 (최초 1회 또는 packages/ 없을 때)
+nuget.exe restore SampleOrderSystem.sln -PackagesDirectory packages
+
+# 2. 빌드 (Visual Studio 2022에서 SampleOrderSystem.sln 열기 → 빌드)
+# MSBuild 경로: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe
+
+# 3. 테스트 실행
 bin\Debug\SampleOrderSystemTests.exe
 
-# 커버리지 측정 (결과는 .\Coverage\index.html 에서 확인)
+# 4. 커버리지 측정 (결과: Coverage\index.html)
 OpenCppCoverage.exe --sources src --export_type=html:Coverage -- bin\Debug\SampleOrderSystemTests.exe
 ```
 
