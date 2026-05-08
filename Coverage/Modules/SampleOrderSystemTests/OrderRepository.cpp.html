@@ -20,7 +20,7 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     load();
 }</span>
 
-<span style = "background-color:#fdd">std::vector&lt;Order&gt; OrderRepository::findAll() const {
+<span style = "background-color:#dfd">std::vector&lt;Order&gt; OrderRepository::findAll() const {
     return orders_;
 }</span>
 
@@ -32,7 +32,7 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     return static_cast&lt;int&gt;(queue_.size());
 }</span>
 
-<span style = "background-color:#fdd">void OrderRepository::save(const Order&amp; order) {
+<span style = "background-color:#dfd">void OrderRepository::save(const Order&amp; order) {
     orders_.push_back(order);
     persist();
 }</span>
@@ -62,7 +62,7 @@ OrderRepository::OrderRepository(const std::string&amp; orderFilePath,
     loadFile(queueFilePath_, queue_);
 }</span>
 
-<span style = "background-color:#fdd">void OrderRepository::persist() const {
+<span style = "background-color:#dfd">void OrderRepository::persist() const {
     std::ofstream f(orderFilePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + orderFilePath_);
     f &lt;&lt; nlohmann::json(orders_).dump(2);
