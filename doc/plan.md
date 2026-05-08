@@ -24,7 +24,6 @@ include/nlohmann/   - json.hpp
 | Phase 2 | 시료 관리 | `doc/design/phase2_sample_management.md` | 완료 |
 | Phase 3 | 주문 접수 | `doc/design/phase3_order_reservation.md` | 완료 |
 | Phase 4 | 주문 승인/거절 | `doc/design/phase4_order_approval.md` | 완료 |
-| Phase 5 | 모니터링 | `doc/design/phase5_monitoring.md` | 미시작 |
-| Phase 6 | 생산라인 | `doc/design/phase6_production_line.md` | 미시작 |
+| Phase 5 | 모니터링 | `doc/design/phase5_monitoring.md` | 완료 |
+| Phase 6 | 생산라인 | `doc/design/phase6_production_line.md` | 완료 |
 | Phase 7 | 출고 처리 | `doc/design/phase7_shipment.md` | 미시작 |
-| Phase 8 | 메인 UI 통합 | `doc/design/phase8_integration.md` | 미시작 |
