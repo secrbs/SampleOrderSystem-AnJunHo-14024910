@@ -102,7 +102,9 @@
     <ClCompile Include="repository\SampleRepository.cpp" />
     <ClCompile Include="repository\OrderRepository.cpp" />
     <ClCompile Include="controller\MainController.cpp" />
+    <ClCompile Include="controller\SampleController.cpp" />
     <ClCompile Include="view\MainView.cpp" />
+    <ClCompile Include="view\SampleView.cpp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -112,6 +114,8 @@
     <ClInclude Include="repository\SampleRepository.h" />
     <ClInclude Include="repository\OrderRepository.h" />
     <ClInclude Include="controller\MainController.h" />
+    <ClInclude Include="controller\SampleController.h" />
+    <ClInclude Include="view\SampleView.h" />
     <ClInclude Include="view\MainView.h" />
   </ItemGroup>
 

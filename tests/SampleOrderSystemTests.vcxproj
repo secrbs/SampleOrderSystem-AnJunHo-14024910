@@ -107,6 +107,7 @@
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
     <ClCompile Include="Phase1Test.cpp" />
+    <ClCompile Include="Phase2Test.cpp" />
   </ItemGroup>
 
   <!-- src/ 비즈니스 로직 소스 파일 (main.cpp 제외) -->
@@ -114,7 +115,9 @@
     <ClCompile Include="$(SolutionDir)src\repository\SampleRepository.cpp" />
     <ClCompile Include="$(SolutionDir)src\repository\OrderRepository.cpp" />
     <ClCompile Include="$(SolutionDir)src\controller\MainController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\SampleController.cpp" />
     <ClCompile Include="$(SolutionDir)src\view\MainView.cpp" />
+    <ClCompile Include="$(SolutionDir)src\view\SampleView.cpp" />
   </ItemGroup>
 
   <!-- NuGet 참조 -->
