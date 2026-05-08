@@ -101,13 +101,17 @@
     </Link>
   </ItemDefinitionGroup>
 
-  <!-- 테스트 파일 목록 (Phase 진행에 따라 추가) -->
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="Phase1Test.cpp" />
   </ItemGroup>
 
-  <!-- src/ 비즈니스 로직 소스 파일 (Phase 진행에 따라 추가, main.cpp 제외) -->
+  <!-- src/ 비즈니스 로직 소스 파일 (main.cpp 제외) -->
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)src\repository\SampleRepository.cpp" />
+    <ClCompile Include="$(SolutionDir)src\repository\OrderRepository.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\MainController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\view\MainView.cpp" />
   </ItemGroup>
 
   <!-- NuGet 참조 -->
