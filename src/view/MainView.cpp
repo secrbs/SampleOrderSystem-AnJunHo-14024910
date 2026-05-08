@@ -88,7 +88,7 @@ int MainView::getChoice() const {
 
 void MainView::showInvalidInput() const {
     moveCursor(0, INPUT_ROW + 1);
-    std::cout << "  올바른 메뉴 번호를 입력하세요 (0~8).\n";
+    std::cout << "  올바른 메뉴 번호를 입력하세요 (0~6).\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }
 

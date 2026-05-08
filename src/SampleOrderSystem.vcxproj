@@ -93,12 +93,14 @@
     <ClCompile Include="controller\ApprovalController.cpp" />
     <ClCompile Include="controller\MonitoringController.cpp" />
     <ClCompile Include="controller\ProductionController.cpp" />
+    <ClCompile Include="controller\ShipmentController.cpp" />
     <ClCompile Include="view\MainView.cpp" />
     <ClCompile Include="view\SampleView.cpp" />
     <ClCompile Include="view\OrderView.cpp" />
     <ClCompile Include="view\ApprovalView.cpp" />
     <ClCompile Include="view\MonitorView.cpp" />
     <ClCompile Include="view\ProductionView.cpp" />
+    <ClCompile Include="view\ShipmentView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Sample.h" />

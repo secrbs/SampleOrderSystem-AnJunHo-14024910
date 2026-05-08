@@ -14,8 +14,9 @@
 #include &lt;chrono&gt;
 #include &lt;ctime&gt;
 
-ShipmentController::ShipmentController(OrderRepository&amp; orderRepo)
-<span style = "background-color:#dfd">    : orderRepo_(orderRepo) {}</span>
+ShipmentController::ShipmentController(SampleRepository&amp; sampleRepo,
+                                        OrderRepository&amp; orderRepo)
+<span style = "background-color:#dfd">    : sampleRepo_(sampleRepo), orderRepo_(orderRepo) {}</span>
 
 <span style = "background-color:#dfd">std::vector&lt;Order&gt; ShipmentController::getConfirmedOrders() const {
     std::vector&lt;Order&gt; result;
@@ -28,9 +29,17 @@ ShipmentController::ShipmentController(OrderRepository&amp; orderRepo)
 <span style = "background-color:#dfd">bool ShipmentController::release(const std::string&amp; orderId) {
     auto orders = orderRepo_.findAll();
     auto it = std::find_if(orders.begin(), orders.end(),
-        [&amp;orderId](const Order&amp; o) { return o.orderId == orderId; });
+        [&amp;orderId](const Order&amp; o){ return o.orderId == orderId; });
     if (it == orders.end()) return false;
     if (it-&gt;status != OrderStatus::CONFIRMED) return false;</span>
+
+    // ì¬ê³  ì°¨ê°
+<span style = "background-color:#dfd">    auto sample = sampleRepo_.findById(it-&gt;sampleId);
+    if (sample.has_value()) {
+        Sample updated = *sample;
+        updated.stock -= it-&gt;quantity;
+        sampleRepo_.update(updated);
+    }</span>
 
 <span style = "background-color:#dfd">    it-&gt;status    = OrderStatus::RELEASE;
     it-&gt;updatedAt = currentTimestamp();
@@ -43,7 +52,7 @@ ShipmentController::ShipmentController(OrderRepository&amp; orderRepo)
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
     localtime_s(&amp;tm, &amp;t);</span>
-    char buf[32];
+    char buf[20];
 <span style = "background-color:#dfd">    std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", &amp;tm);
     return buf;
 }</span></pre>

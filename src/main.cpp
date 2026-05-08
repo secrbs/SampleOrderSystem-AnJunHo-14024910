@@ -11,18 +11,19 @@
 #include "controller/ApprovalController.h"
 #include "controller/MonitoringController.h"
 #include "controller/ProductionController.h"
+#include "controller/ShipmentController.h"
 #include "view/MainView.h"
 #include "view/SampleView.h"
 #include "view/OrderView.h"
 #include "view/ApprovalView.h"
 #include "view/MonitorView.h"
 #include "view/ProductionView.h"
+#include "view/ShipmentView.h"
 
 // 메뉴 번호 → 이름 매핑 (경로 표시용)
 static const std::map<int, std::string> MAIN_MENU_NAMES = {
     {1, "시료 관리"}, {2, "시료 주문"}, {3, "주문 승인/거절"},
-    {4, "모니터링"}, {5, "생산라인 조회"}, {6, "출고 처리"},
-    {7, ""}, {8, ""}
+    {4, "모니터링"}, {5, "생산라인 조회"}, {6, "출고 처리"}
 };
 static const std::map<int, std::string> SAMPLE_MENU_NAMES = {
     {1, "시료 등록"}, {2, "시료 목록"}, {3, "시료 검색"}
@@ -207,10 +208,28 @@ int main() {
                 pv.showStatus(path, pc.getCurrentJob(), pc.getQueue(), pc.getElapsedMinutes());
                 break;
             }
-            // Phase 7~8: 이후 연결
-            case 6: case 7: case 8:
-                // 미구현 메뉴 — 메인으로 돌아감 (별도 메시지 없음)
+            case 6: {
+                ShipmentController sc(sampleRepo, orderRepo);
+                ShipmentView sv;
+                while (true) {
+                    auto confirmed = sc.getConfirmedOrders();
+                    std::string orderId = sv.showConfirmedOrders(path, confirmed);
+                    if (orderId.empty()) break;
+                    if (sc.release(orderId)) {
+                        auto orders = orderRepo.findAll();
+                        auto it = std::find_if(orders.begin(), orders.end(),
+                            [&orderId](const Order& o){ return o.orderId == orderId; });
+                        int remaining = -1;
+                        auto sample = sampleRepo.findById(it->sampleId);
+                        if (sample.has_value()) remaining = sample->stock;
+                        if (it != orders.end()) sv.showResult(path, *it, remaining);
+                    } else {
+                        sv.showMessage("출고 실패.");
+                        _getch();
+                    }
+                }
                 break;
+            }
             default:
                 // 0~8 이외 입력 — 에러 표시
                 mainView.showInvalidInput();
