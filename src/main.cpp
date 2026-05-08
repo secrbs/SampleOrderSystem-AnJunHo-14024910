@@ -8,14 +8,17 @@
 #include "controller/MainController.h"
 #include "controller/SampleController.h"
 #include "controller/OrderController.h"
+#include "controller/ApprovalController.h"
 #include "view/MainView.h"
 #include "view/SampleView.h"
 #include "view/OrderView.h"
+#include "view/ApprovalView.h"
 
 // 메뉴 번호 → 이름 매핑 (경로 표시용)
 static const std::map<int, std::string> MAIN_MENU_NAMES = {
     {1, "시료 관리"}, {2, "시료 주문"}, {3, "주문 승인/거절"},
-    {4, "모니터링"}, {5, "생산라인 조회"}, {6, "출고 처리"}
+    {4, "모니터링"}, {5, "생산라인 조회"}, {6, "출고 처리"},
+    {7, ""}, {8, ""}
 };
 static const std::map<int, std::string> SAMPLE_MENU_NAMES = {
     {1, "시료 등록"}, {2, "시료 목록"}, {3, "시료 검색"}
@@ -23,6 +26,54 @@ static const std::map<int, std::string> SAMPLE_MENU_NAMES = {
 static const std::map<int, std::string> ORDER_MENU_NAMES = {
     {1, "주문 접수"}
 };
+
+static void runApproval(SampleRepository& sr, OrderRepository& or_,
+                         const std::string& path) {
+    ApprovalController ctrl(sr, or_);
+    ApprovalView       view;
+
+    while (true) {
+        auto reserved = ctrl.getReservedOrders();
+        std::string orderId = view.showReservedOrders(path, reserved);
+        if (orderId.empty()) break;  // 취소 → 메인으로
+
+        // 해당 주문 존재 확인
+        auto orders = or_.findAll();
+        auto it = std::find_if(orders.begin(), orders.end(),
+            [&orderId](const Order& o){ return o.orderId == orderId; });
+        if (it == orders.end() || it->status != OrderStatus::RESERVED) {
+            view.showMessage("유효한 RESERVED 주문번호가 아닙니다.");
+            std::cout << "\n"; _getch(); continue;
+        }
+
+        auto sample = sr.findById(it->sampleId);
+        if (!sample.has_value()) {
+            view.showMessage("시료 정보를 찾을 수 없습니다.");
+            std::cout << "\n"; _getch(); continue;
+        }
+        char action = view.getApproveOrReject(path, *it, *sample);
+        if (action == 'Y' || action == 'y') {
+            ctrl.approve(orderId);
+        } else if (action == 'N' || action == 'n') {
+            ctrl.reject(orderId);
+        } else {
+            continue;  // 취소
+        }
+
+        // 결과 표시 (갱신된 주문 + 남은 재고)
+        auto updated = or_.findAll();
+        auto uit = std::find_if(updated.begin(), updated.end(),
+            [&orderId](const Order& o){ return o.orderId == orderId; });
+        if (uit != updated.end()) {
+            int remaining = -1;
+            if (uit->status == OrderStatus::CONFIRMED) {
+                auto updSample = sr.findById(uit->sampleId);
+                if (updSample.has_value()) remaining = updSample->stock;
+            }
+            view.showResult(path, *uit, remaining);
+        }
+    }
+}
 
 static std::string buildPath(const std::string& parent, int ch,
                               const std::map<int, std::string>& names) {
@@ -125,6 +176,10 @@ int main() {
     while (true) {
         mainView.drawScreen(mainCtrl.getSystemStatus());
         int choice = mainView.getChoice();
+        if (choice == -2) {          // 빈칸 → 종료 확인
+            if (mainView.confirmExit()) break;
+            else continue;
+        }
         if (!mainCtrl.handleMenu(choice)) break;
 
         std::string path = buildPath("선택", choice, MAIN_MENU_NAMES);
@@ -132,8 +187,9 @@ int main() {
         switch (choice) {
             case 1: runSampleManagement(sampleRepo, path); break;
             case 2: runOrderPlacement(sampleRepo, orderRepo, path); break;
-            // Phase 4~8: 이후 연결
-            case 3: case 4: case 5: case 6: case 7: case 8:
+            case 3: runApproval(sampleRepo, orderRepo, path); break;
+            // Phase 5~8: 이후 연결
+            case 4: case 5: case 6: case 7: case 8:
                 // 미구현 메뉴 — 메인으로 돌아감 (별도 메시지 없음)
                 break;
             default:

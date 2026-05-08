@@ -11,6 +11,7 @@
         <pre class="prettyprint lang-cpp linenums">
 #include "ApprovalController.h"
 #include &lt;algorithm&gt;
+#include &lt;cmath&gt;
 #include &lt;chrono&gt;
 #include &lt;ctime&gt;
 
@@ -29,7 +30,7 @@ ApprovalController::ApprovalController(SampleRepository&amp; sampleRepo,
 <span style = "background-color:#dfd">bool ApprovalController::approve(const std::string&amp; orderId) {
     auto orders = orderRepo_.findAll();
     auto it = std::find_if(orders.begin(), orders.end(),
-        [&amp;orderId](const Order&amp; o) { return o.orderId == orderId; });
+        [&amp;orderId](const Order&amp; o){ return o.orderId == orderId; });
     if (it == orders.end()) return false;
     if (it-&gt;status != OrderStatus::RESERVED) return false;</span>
 
@@ -65,7 +66,7 @@ ApprovalController::ApprovalController(SampleRepository&amp; sampleRepo,
 <span style = "background-color:#dfd">bool ApprovalController::reject(const std::string&amp; orderId) {
     auto orders = orderRepo_.findAll();
     auto it = std::find_if(orders.begin(), orders.end(),
-        [&amp;orderId](const Order&amp; o) { return o.orderId == orderId; });
+        [&amp;orderId](const Order&amp; o){ return o.orderId == orderId; });
     if (it == orders.end()) return false;
     if (it-&gt;status != OrderStatus::RESERVED) return false;</span>
 
@@ -80,7 +81,7 @@ ApprovalController::ApprovalController(SampleRepository&amp; sampleRepo,
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
     localtime_s(&amp;tm, &amp;t);</span>
-    char buf[32];
+    char buf[20];
 <span style = "background-color:#dfd">    std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", &amp;tm);
     return buf;
 }</span></pre>

@@ -62,12 +62,12 @@ struct ProductionJob {
     std::string enqueuedAt;
 };
 
-<span style = "background-color:#fdd">inline void to_json(nlohmann::json&amp; j, const ProductionJob&amp; p) {
+<span style = "background-color:#dfd">inline void to_json(nlohmann::json&amp; j, const ProductionJob&amp; p) {
     j = {{"orderId",p.orderId},{"sampleId",p.sampleId},</span>
          {"shortage",p.shortage},{"actualProduction",p.actualProduction},
          {"totalTime",p.totalTime},{"enqueuedAt",p.enqueuedAt}};
-<span style = "background-color:#fdd">}</span>
-<span style = "background-color:#dfd">inline void from_json(const nlohmann::json&amp; j, ProductionJob&amp; p) {
+<span style = "background-color:#dfd">}
+inline void from_json(const nlohmann::json&amp; j, ProductionJob&amp; p) {
     j.at("orderId").get_to(p.orderId);   j.at("sampleId").get_to(p.sampleId);
     j.at("shortage").get_to(p.shortage); j.at("actualProduction").get_to(p.actualProduction);
     j.at("totalTime").get_to(p.totalTime); j.at("enqueuedAt").get_to(p.enqueuedAt);

@@ -7,6 +7,7 @@ public:
     void drawScreen(const SystemStatus& status) const;
     int  getChoice() const;
     void showInvalidInput() const;
+    bool confirmExit() const;       // true = 종료, false = 취소
 
 private:
     void updateClock() const;

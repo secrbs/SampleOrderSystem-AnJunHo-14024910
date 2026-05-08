@@ -76,6 +76,7 @@ int MainView::getChoice() const {
                 char ch = static_cast<char>(_getch());
                 std::cout << ch << "\n";
                 if (ch >= '0' && ch <= '9') return ch - '0';
+                if (ch == '\r' || ch == '\n') return -2;  // 빈칸 = 종료 확인
                 return -1;
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -89,4 +90,12 @@ void MainView::showInvalidInput() const {
     moveCursor(0, INPUT_ROW + 1);
     std::cout << "  올바른 메뉴 번호를 입력하세요 (0~8).\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
+}
+
+bool MainView::confirmExit() const {
+    moveCursor(0, INPUT_ROW + 1);
+    std::cout << "  종료하시겠습니까? [Y/N] > ";
+    char ch = static_cast<char>(_getch());
+    std::cout << ch << "\n";
+    return (ch == 'Y' || ch == 'y');
 }

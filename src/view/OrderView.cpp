@@ -55,14 +55,14 @@ bool OrderView::confirmOrder(const std::string& path,
                               const Sample& sample,
                               const OrderInput& input) const {
     header(path, "주문 확인");
-    std::cout << "  ┌─────────────────────────────────────────────────────┐\n";
-    std::cout << "  │  시료    : " << std::left << std::setw(40)
-              << (sample.name + " (" + sample.id + ")") << "│\n";
-    std::cout << "  │  고객    : " << std::setw(40) << input.customerName << "│\n";
-    std::cout << "  │  수량    : " << std::setw(40)
-              << (std::to_string(input.quantity) + " ea") << "│\n";
-    std::cout << "  └─────────────────────────────────────────────────────┘\n\n";
-
+    const int L = 10;
+    std::cout << "  " << std::left << std::setw(L) << "시료"
+              << ": " << sample.name << " (" << sample.id << ")\n";
+    std::cout << "  " << std::setw(L) << "고객"
+              << ": " << input.customerName << "\n";
+    std::cout << "  " << std::setw(L) << "수량"
+              << ": " << input.quantity << " ea\n";
+    std::cout << "\n";
     sline();
     std::cout << "  [Y] 접수    [N] 취소 > ";
     char ch = static_cast<char>(_getch());
@@ -73,18 +73,20 @@ bool OrderView::confirmOrder(const std::string& path,
 void OrderView::showResult(const std::string& path, const Order& order,
                             const Sample& sample) const {
     header(path, "주문 접수 완료");
-    std::cout << "  ┌─────────────────────────────────────────────────────┐\n";
-    std::cout << "  │  주문번호 : " << std::left << std::setw(40)
-              << order.orderId << "│\n";
-    std::cout << "  │  시료     : " << std::setw(40)
-              << (sample.name + " (" + sample.id + ")") << "│\n";
-    std::cout << "  │  고객     : " << std::setw(40)
-              << order.customerName << "│\n";
-    std::cout << "  │  수량     : " << std::setw(40)
-              << (std::to_string(order.quantity) + " ea") << "│\n";
-    std::cout << "  │  상태     : " << std::setw(40) << "RESERVED" << "│\n";
-    std::cout << "  │  접수일시 : " << std::setw(40) << order.createdAt << "│\n";
-    std::cout << "  └─────────────────────────────────────────────────────┘\n\n";
+    const int L = 10;
+    std::cout << "  " << std::left << std::setw(L) << "주문번호"
+              << ": " << order.orderId << "\n";
+    std::cout << "  " << std::setw(L) << "시료"
+              << ": " << sample.name << " (" << sample.id << ")\n";
+    std::cout << "  " << std::setw(L) << "고객"
+              << ": " << order.customerName << "\n";
+    std::cout << "  " << std::setw(L) << "수량"
+              << ": " << order.quantity << " ea\n";
+    std::cout << "  " << std::setw(L) << "상태"
+              << ": RESERVED\n";
+    std::cout << "  " << std::setw(L) << "접수일시"
+              << ": " << order.createdAt << "\n";
+    std::cout << "\n";
     sline();
     std::cout << "  (계속하려면 아무 키나 누르세요)\n선택 > ";
     _getch();

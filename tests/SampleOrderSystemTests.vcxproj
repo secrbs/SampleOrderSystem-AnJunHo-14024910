@@ -109,6 +109,7 @@
     <ClCompile Include="Phase1Test.cpp" />
     <ClCompile Include="Phase2Test.cpp" />
     <ClCompile Include="Phase3Test.cpp" />
+    <ClCompile Include="Phase4Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)src\repository\SampleRepository.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="$(SolutionDir)src\controller\MainController.cpp" />
     <ClCompile Include="$(SolutionDir)src\controller\SampleController.cpp" />
     <ClCompile Include="$(SolutionDir)src\controller\OrderController.cpp" />
+    <ClCompile Include="$(SolutionDir)src\controller\ApprovalController.cpp" />
     <ClCompile Include="$(SolutionDir)src\view\MainView.cpp" />
     <ClCompile Include="$(SolutionDir)src\view\SampleView.cpp" />
   </ItemGroup>

@@ -135,14 +135,17 @@ void SampleView::drawPage(const std::string&amp; path, const std::string&amp; ti
 
 <span style = "background-color:#fdd">std::optional&lt;Sample&gt; SampleView::inputSample() const {
     Sample s;
-    std::cout &lt;&lt; "  ID            &gt; "; std::cin &gt;&gt; s.id;
-    std::cin.ignore(1024, '\n');
+    std::cout &lt;&lt; "  ID            &gt; "; std::getline(std::cin, s.id);
     if (s.id.empty()) return std::nullopt;
     std::cout &lt;&lt; "  ì´ë¦          &gt; "; std::getline(std::cin, s.name);
     if (s.name.empty()) return std::nullopt;
-    std::cout &lt;&lt; "  íê·  ìì°ìê° &gt; "; std::cin &gt;&gt; s.avgProductionTime;
-    std::cout &lt;&lt; "  ìì¨ (0~1)    &gt; "; std::cin &gt;&gt; s.yield;
-    std::cin.ignore(1024, '\n');
+    std::string tStr, yStr;
+    std::cout &lt;&lt; "  íê·  ìì°ìê° &gt; "; std::getline(std::cin, tStr);
+    if (tStr.empty()) return std::nullopt;
+    std::cout &lt;&lt; "  ìì¨ (0~1)    &gt; "; std::getline(std::cin, yStr);
+    if (yStr.empty()) return std::nullopt;
+    try { s.avgProductionTime = std::stod(tStr); s.yield = std::stod(yStr); }
+    catch (...) { return std::nullopt; }
     s.stock = 0;
     return s;
 }</span>

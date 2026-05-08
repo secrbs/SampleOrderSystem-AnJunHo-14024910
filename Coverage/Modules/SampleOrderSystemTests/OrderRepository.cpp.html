@@ -24,14 +24,14 @@ int OrderRepository::productionQueueCount() const { return static_cast&lt;int&gt
 
 <span style = "background-color:#dfd">void OrderRepository::save(const Order&amp; o) { orders_.push_back(o); persist(); }</span>
 
-<span style = "background-color:#fdd">bool OrderRepository::update(const Order&amp; o) {
+<span style = "background-color:#dfd">bool OrderRepository::update(const Order&amp; o) {
     auto it = std::find_if(orders_.begin(), orders_.end(),
         [&amp;o](const Order&amp; x){ return x.orderId == o.orderId; });
     if (it == orders_.end()) return false;
     *it = o; persist(); return true;
 }</span>
 
-<span style = "background-color:#fdd">void OrderRepository::enqueueJob(const ProductionJob&amp; job) {
+<span style = "background-color:#dfd">void OrderRepository::enqueueJob(const ProductionJob&amp; job) {
     queue_.push_back(job); persistQueue();
 }</span>
 
@@ -56,7 +56,7 @@ int OrderRepository::productionQueueCount() const { return static_cast&lt;int&gt
     f &lt;&lt; nlohmann::json(orders_).dump(2);
 }</span>
 
-<span style = "background-color:#fdd">void OrderRepository::persistQueue() const {
+<span style = "background-color:#dfd">void OrderRepository::persistQueue() const {
     std::ofstream f(queuePath_);
     if (!f.is_open()) throw std::runtime_error("Cannot write: " + queuePath_);
     f &lt;&lt; nlohmann::json(queue_).dump(2);
